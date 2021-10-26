@@ -1,0 +1,116 @@
+.banner-top{
+    background-color: rgb(72, 147, 218);
+    border: 0.5px solid rgba(204, 204, 204, 0.7);
+    box-shadow: 10px 5px 15px rgba(128, 128, 128, 0.445);
+    text-align: left;
+    font-size: 30px;
+    width: 100%;
+    height: 60px;
+    position: fixed;
+    display: inline;
+    overflow: hidden;
+}
+.box{
+    padding: 10px;
+    border: 0.5px solid rgba(204, 204, 204, 0.7);
+    box-shadow: 5px 8px 15px rgba(128, 128, 128, 0.445);
+    margin-bottom: 15px; 
+}
+.only-icon{
+    display: none;
+}
+.banner-top-text{
+
+    margin-left: 10%;
+    margin-top: 10px;
+    font-weight: 550;
+    display: inline-block;
+}
+.mg{
+    margin-right: 50px;
+}
+.btn{
+    background-color: rgb(72, 147, 218);
+    color: black;
+    font-size: 19px;
+    float: right;
+}
+
+
+.btn:hover{
+    color:white;
+    background-color: rgb(72, 147, 218);
+}
+
+
+label{
+    color: rgb(48, 43, 43);
+    font-size: 17.5px;
+}
+
+input[type=text], input[type=number],input[type=tel], select {
+    width: 100%;
+    padding: 5px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    /* box-sizing: border-box;  */
+    font-size: 15px;
+  }
+  input:focus, select:focus {
+    border: 2px solid black;
+  }
+  
+  input[type=submit] {
+    background-color: #14a30a;
+    color: white;
+    padding: 5px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 17px;
+  }
+  
+  input[type=submit]:hover {
+    background-color: #1f8318;
+  }
+
+  
+
+@media (max-width:772px){
+    .banner-top-text{
+        margin-top: 22px;
+        margin-left: 100px;
+        font-size: 23px;
+    }
+    .btn{
+        font-size: 17px;
+    }
+    .banner-top{
+        height: 80px;
+    }
+    .btn{
+        margin-top: 22px;
+    }
+    .with-icon{
+        display: none;
+    }
+    .only-icon{
+        display: inline;
+    }
+    .mg{
+        margin-right: 0px;
+    }
+}
+
+@media (max-width:350px){
+    .banner-top-text{
+        font-size: 20px;
+        margin-top: 26px;
+    }
+    label{
+        font-size: 16px;
+    }
+}

@@ -1,0 +1,27 @@
+/* Scrollbar  */
+
+::-webkit-scrollbar {
+    width: 0px;
+}
+
+::-webkit-scrollbar-track {
+    background: #fff;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #101010;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #101010;
+}
+
+#doro-aside{
+	scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* IE 10+ */
+}
+
+html{
+scrollbar-width: none; /* Firefox */
+-ms-overflow-style: none;  /* IE 10+ */
+}
