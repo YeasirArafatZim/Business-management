@@ -10,6 +10,9 @@
 		$p_amount = $_SESSION["amount"];
 		$s_name = $_POST["s_name"];
 		$address = $_POST["address"];
+
+		$_SESSION["s_name"] = $s_name;
+		$_SESSION["address"]= $address;
 	}
 ?>
 
