@@ -10,6 +10,14 @@
     display: inline;
     overflow: hidden;
 }
+.selectedMenu{
+    color:white !important;
+    font-weight: bold !important;
+}
+#doro-aside #doro-main-menu > ul > li > a:hover{
+    font-weight: bold !important;
+}
+
 .box{
     padding: 10px;
     border: 0.5px solid rgba(204, 204, 204, 0.7);

@@ -1,6 +1,7 @@
 <?php
 	require_once("../uservelidation.php");
 	require_once("../connect_db.php");
+	$currentPage = "purchase";
 ?>
 
 <!DOCTYPE html>
