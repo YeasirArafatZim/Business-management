@@ -21,10 +21,10 @@
 						class="menu-item menu-item-type-post_type menu-item-object-page menu-item-159"><a class= "<?php echo($currentPage == "purchase" ? 'selectedMenu' : '');  ?>" href="/business_management/purchase/">Purchase</a>
 					</li>
 					<li id="menu-item-164"
-						class="menu-item menu-item-type-post_type menu-item-object-page menu-item-164"><a href="#">Sell</a>
+						class="menu-item menu-item-type-post_type menu-item-object-page menu-item-164"><a class= "<?php echo($currentPage == "sell" ? 'selectedMenu' : '');  ?>" href="/business_management/sell/sell.php">Sell</a>
 					</li>
 					<li id="menu-item-163"
-						class="menu-item menu-item-type-post_type menu-item-object-page menu-item-163"><a href="#">Stock</a>
+						class="menu-item menu-item-type-post_type menu-item-object-page menu-item-163"><a class= "<?php echo($currentPage == "stock" ? 'selectedMenu' : '');  ?>" href="/business_management/stock/stock.php">Stock</a>
 					</li>
 					<li id="menu-item-160"
 						class="menu-item menu-item-type-post_type menu-item-object-page menu-item-160"><a href="#">Profit</a>

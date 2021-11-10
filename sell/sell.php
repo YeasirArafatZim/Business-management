@@ -1,7 +1,7 @@
 <?php
 	require_once("../uservelidation.php");
 	require_once("../connect_db.php");
-	$currentPage = "purchase";
+	$currentPage = "sell";
 ?>
 
 <!DOCTYPE html>
@@ -25,11 +25,10 @@
 	<script type='text/javascript' src='../js/jquery.min9d52.js?ver=3.5.1' id='jquery-core-js'></script>
 
 	<!-- Style  -->
-	<link rel="stylesheet" type="text/css" href="../css/style.css" media='all'>
+	<link rel="stylesheet" href="..//css/style.css">
 
 	<!-- Font awesome  -->
 	<script src="https://kit.fontawesome.com/6a7e053e4e.js" crossorigin="anonymous"></script>
-
 
 
 </head>
@@ -44,11 +43,12 @@
 
 		<!-- Main Section -->
 		<div id="doro-main">
+
 			<!-- Heading  -->
 			<div class="banner-top">
 				<div class="row">
 					<div class="col-md-3 col-sm-4 col-6 mg">
-						<h3 class="banner-top-text">PURCHASE</h3>
+						<h3 class="banner-top-text">SELL</h3>
 					</div>
 					<div class="col-md-6 col-sm-7 col-6  only-icon">
 						<button class="btn"> <i class="fas fa-user"></i></button>
@@ -61,55 +61,74 @@
 				</div>
 			</div>
 
-			<!-- Default Page -->
-			<div class="container px-5" style="padding-top: 80px;">
+            <?php
+                $sql = "SELECT * FROM products INNER JOIN stock ON products.id=stock.pid  order by products.name, quantity desc";
+                $result = mysqli_query($conn, $sql);
+            ?>
 
+			<!-- Default Page -->
+			<div class="container px-5" style="padding-top: 80px">
+                <h4 style="font-weight: bold; text-align:center">Product Sell</h4>
+                
                 <form action="submit.php" method="post">
-                    <div class="box mt-3">
+                    <div class="box mt-1">
+
                         <div class="row mt-4 mx-1">
                             <div class="col-md-6 position-static">
-                                <label for="pname">Product Name</label><br>
-                                <input type="text" placeholder="product name" id="pname" name="pname" required>
+                                <label for="productName">Product Name</label><br>
+								
+                                <select name="productName" id="productName" required>
+                                    <option value="" disabled selected>--Select a Product--</option>
+                                    <?php
+                                        if (mysqli_num_rows($result) > 0) {
+                                            // output data of each row
+                                            while($row = mysqli_fetch_assoc($result)) {
+												if($row["quantity"] > 0){
+
+                                    ?>
+                                    			<option value= <?php echo $row["pid"] ?>> <?php echo $row["name"]; ?> (<?php echo $row["quantity"]; ?>kg) (<?php echo $row["packet"];?> pkt)</option>
+
+                                    <?php  }}} ?>
+                                </select>
                             </div>
 
                             <div class="col-md-6 position-static">
-                                <label for="pprice">Unit Price</label><br>
-                                <input type="number" min="0" step="0.1" placeholder="price /kg" id="price" name="pprice" required autocomplete="off"><br>
+                                <label for="pprice">Sell Price/kg</label><br>
+                                <input type="number" min="0" step="0.1" placeholder="price /kg" id="price" name="price" required><br>
                             </div>
+
                         </div>
 
                         <div class="row mt-3 mx-2">
                             <div class="col-md-6 position-static">
                                 <label for="pqnt">Quantity (kg)</label><br>
-                                <input type="number" step="any" min="0" placeholder="product quantity in kg" id="qnt" name="pqnt" required>
+                                <input type="number" step="any" min="0" onchange="calcPkt()"  placeholder="product quantity in kg" id="qnt" name="qnt" required>
                             </div>
 
                             <div class="col-md-6 position-static">
                                 <label for="ppkt">No of Packet</label><br>
-                                <input type="number" min="0" step="1" placeholder="no of packet" id="pkt" name="ppkt" required><br>
+                                <input type="number" min="0" step="1" value="20" placeholder="no of packet" id="pkt" name="pkt" required><br>
                             </div>
                         </div>
 
                         <div class="row mt-3 mx-2">
 							<div class="col-md-6 position-static">
-								<label for="s_phn">Seller's Mobile No</label><br>
-                            	<input type="tel" pattern="[0]{1}[1]{1}[0-9]{9}" placeholder="format: 01758123578" id="s_phn" name="s_phn" required><br>
+								<label for="s_phn">Customer's Mobile No</label><br>
+                            	<input type="tel" pattern="[0]{1}[1]{1}[0-9]{9}" placeholder="format: 01758123578" id="c_phn" name="c_phn" required><br>
                             </div>
 
                             <div class="col-md-6 position-static">
                                 <label for="paid_amount">Paid Amount</label><br>
-                                <input type="number" min="0" step="0.1" placeholder="amount paid to the seller" id="paid_amount" name="paid_amount" required><br>
+                                <input type="number" min="0" step="0.1" placeholder="customer's payment" id="paid_amount" name="paid_amount" required><br>
                             </div>
 						</div>
 
-
-                        <br><br>
+                                            </br></br>
                     </div>
 
                     <div style="text-align:center">
-                        <input type="submit" value="Submit" name="submit">
+                            <input type="submit" value="Submit" name="submit">
                     </div>
-                    
                 </form>
 
 			</div>
@@ -129,11 +148,13 @@
 	<!-- SideBar Scripts -->
 	<script type='text/javascript' src='../js/waypoints-min5152.js?ver=1.0' id='waypoints-min-js'></script>
 	<script type='text/javascript' src='../js/main5152.js?ver=1.0' id='doro-main-js'></script>
-    <script>
+	<script>
         const logout = () => location.replace("../logout.php");
+
+		
     </script>
 
-	
+
 </body>
 </html>
 

@@ -84,7 +84,9 @@ input[type=text], input[type=number],input[type=tel], select {
   input[type=submit]:hover {
     background-color: #1f8318;
   }
-
+.borderless td, .borderless th, .borderless tr {
+    border: none;
+}
   
 
 @media (max-width:772px){
