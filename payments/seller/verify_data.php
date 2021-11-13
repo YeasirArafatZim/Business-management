@@ -1,37 +1,19 @@
 <?php
 	require_once("../../uservelidation.php");
 	require_once("../../connect_db.php");
-    $currentPage = "sell";
-	if(isset($_SESSION["productName"])){
-		$pid = $_SESSION["pid"];
-        $pname = $_SESSION["productName"];
-        $price = $_SESSION["productPrice"];
-        $qnt = $_SESSION["productQnt"];
-        $pkt = $_SESSION["productPkt"];
-        $c_phn = $_SESSION["c_phn"];
-        $c_amount = $_SESSION["c_amount"];
+    $currentPage = "payment";
+    $result = "";
+	if(isset($_POST["submit"])){
+		
+		$s_phn = $_POST["s_phn"];
+		$p_amount = $_POST["paid_amount"];
 
-		$qnt2 = $_SESSION['qnt2'];
-	    $pkt2 = $_SESSION['pkt2'];
-        $pid2 = $_POST['product2'];
+        $_SESSION['s_phn'] = $s_phn;
+        $_SESSION['p_amount'] = $p_amount;
 
-        $_SESSION['pid2'] = $pid2;
-        $c_name = "";
-        $address = "";
-        
-
-        if(isset($_POST['c_name'])){
-            $c_name = $_POST['c_name'];
-            $address = $_POST['address'];
-            $_SESSION['c_name'] = $c_name;
-            $_SESSION['address'] = $address;
-        }else{
-            $sql = "select * from customers where phn_no = '$c_phn'";
-            $result = mysqli_query($conn, $sql);
-            $row = mysqli_fetch_assoc($result);
-            $c_name = $row['name'];
-            $address = $row['address'];
-        }
+        $sql = "SELECT * FROM sellers WHERE phn_no = '$s_phn'";
+        $result = mysqli_query($conn, $sql);
+		
 	}
 ?>
 
@@ -44,7 +26,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 	<meta name="robots" content="index, follow" />
-	<title>মুণি ট্রেডার্স &#8211;Admin Panel </title>
+	<title>মুণি ট্রেডার্স &#8211; Payments </title>
 
 
 	<!-- SideBar Links -->
@@ -80,7 +62,7 @@
 			<div class="banner-top">
 				<div class="row">
 					<div class="col-md-3 col-sm-4 col-6 mg">
-						<h3 class="banner-top-text">SELL</h3>
+						<h3 class="banner-top-text">Seller's Payment</h3>
 					</div>
 					<div class="col-md-6 col-sm-7 col-6  only-icon">
 						<button class="btn"> <i class="fas fa-user"></i></button>
@@ -102,59 +84,34 @@
                 </div>
 
                 <div class="box mt-3 px-5 py-3">
+                    <?php if(mysqli_num_rows($result) > 0){
+                        $row = mysqli_fetch_assoc($result);
+                        $s_name = $row["name"];
+                        $address = $row["address"];
+                        
+                    ?>
+                        
                     <div class="row">
                         <div class="col-md-6 col-sm-6 col-6 position-static">
-                            <p class="verify_label">Product Name: </p>
+                            <p class="verify_label">Cutomer's Mobile No: </p>
                         </div>
                         <div class="col-md-6 col-sm-6 col-6 position-static">
-                            <p class="verify_data"><?php echo $pname?></p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6 col-sm-6 col-6 position-static">
-                            <p class="verify_label">Unit Price: </p>
-                        </div>
-                        <div class="col-md-6 col-sm-6 col-6 position-static">
-                            <p class="verify_data"><?php echo $price?></p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6 col-sm-6 col-6 position-static">
-                            <p class="verify_label">Quantity (kg): </p>
-                        </div>
-                        <div class="col-md-6 col-sm-6 col-6 position-static">
-                            <p class="verify_data"><?php echo $qnt?></p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6 col-sm-6 col-6 position-static">
-                            <p class="verify_label">No of Packet: </p>
-                        </div>
-                        <div class="col-md-6 col-sm-6 col-6 position-static">
-                            <p class="verify_data"><?php echo $pkt?></p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6 col-sm-6 col-6 position-static">
-                            <p class="verify_label">Customer's Mobile No: </p>
-                        </div>
-                        <div class="col-md-6 col-sm-6 col-6 position-static">
-                            <p class="verify_data"><?php $phn = substr($c_phn,5);
-                                        $phn = str_split($c_phn, $split_length = 5);
+                            <p class="verify_data"><?php $phn = substr($s_phn,5);
+                                        $phn = str_split($s_phn, $split_length = 5);
                                         echo $phn[0]."-".$phn[1].$phn[2];?></p>
                         </div>
                     </div>
 					<div class="row">
                         <div class="col-md-6 col-sm-6 col-6 position-static">
-                            <p class="verify_label">Customer's Name: </p>
+                            <p class="verify_label">Seller's Name: </p>
                         </div>
                         <div class="col-md-6 col-sm-6 col-6 position-static">
-                            <p class="verify_data"><?php echo $c_name?></p>
+                            <p class="verify_data"><?php echo $s_name?></p>
                         </div>
                     </div>
 					<div class="row">
                         <div class="col-md-6 col-sm-6 col-6 position-static">
-                            <p class="verify_label">Customer's Address: </p>
+                            <p class="verify_label">Seller's Address: </p>
                         </div>
                         <div class="col-md-6 col-sm-6 col-6 position-static">
                             <p class="verify_data"><?php echo $address?></p>
@@ -166,22 +123,31 @@
                             <p class="verify_label">Paid amount: </p>
                         </div>
                         <div class="col-md-6 col-sm-6 col-6 position-static">
-                            <p class="verify_data"><?php echo $c_amount?></p>
+                            <p class="verify_data"><?php echo $p_amount?></p>
                         </div>
                     </div>
+                    <?php }else{ ?>
 
+                        <h4 class="mx-auto text-center">You don't make any purchase from this Seller. Please check Mobile no.</h4>
+
+                    <?php } ?>
                 
                 </div>
 
-                <div class="box verify_top px-5 pb-0 mt-3 mx-5" style="background-color: #FFD9D9;">
-                    <p class="verify_head">You cannot make changes after submitting the form.</p>
-                </div>
+                <?php if(mysqli_num_rows($result) > 0){    ?>
+
+                    <div class="box verify_top px-5 pb-0 mt-3 mx-5" style="background-color: #FFD9D9;">
+                        <p class="verify_head">You cannot make changes after submitting the form.</p>
+                    </div>
+                <?php } ?>
 
                 <div style="text-align:center">
                     <form action="insert_data.php" method="post">
 
                             <input style="margin-right:30px" class="btn_close" type="submit" value="Close" name="close">
-                            <input type="submit" value="Submit" name="submit">
+                            <?php if(mysqli_num_rows($result) > 0){    ?>
+                                <input type="submit" value="Submit" name="submit">
+                            <?php } ?>
                         
                         
                     </form>

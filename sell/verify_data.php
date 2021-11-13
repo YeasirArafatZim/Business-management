@@ -1,6 +1,8 @@
 <?php
 	require_once("../uservelidation.php");
 	require_once("../connect_db.php");
+    $currentPage = "sell";
+
     $pid = $_SESSION["pid"];
     $pname = $_SESSION["productName"];
     $price = $_SESSION["productPrice"];
@@ -8,6 +10,12 @@
     $pkt = $_SESSION["productPkt"];
     $c_phn = $_SESSION["c_phn"];
     $c_amount = $_SESSION["c_amount"];
+
+    $sql = "select * from customers where phn_no = '$c_phn'";
+    $result = mysqli_query($conn, $sql);
+    $row = mysqli_fetch_assoc($result);
+    $c_name = $row['name'];
+    $address = $row['address'];
 ?>
 
 <!DOCTYPE html>
@@ -116,6 +124,22 @@
                             <p class="verify_data"><?php $phn = substr($c_phn,5);
                                         $phn = str_split($c_phn, $split_length = 5);
                                         echo $phn[0]."-".$phn[1].$phn[2];?></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-6 position-static">
+                            <p class="verify_label">Customer's Name: </p>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-6 position-static">
+                            <p class="verify_data"><?php echo $c_name?></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-6 position-static">
+                            <p class="verify_label">Customer's Address: </p>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-6 position-static">
+                            <p class="verify_data"><?php echo $address?></p>
                         </div>
                     </div>
                     <div class="row">

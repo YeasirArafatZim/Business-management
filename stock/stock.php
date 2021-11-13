@@ -90,7 +90,7 @@
                         </thead>
                         <tbody>
                             <?php  
-                                $sql = "SELECT * FROM stock INNER JOIN products ON stock.pid=products.id order by products.name";
+                                $sql = "SELECT * FROM stock INNER JOIN products ON stock.pid=products.id where quantity > 0 order by products.name";
                                 $result = mysqli_query($conn, $sql);
                                 $i = 1;
 

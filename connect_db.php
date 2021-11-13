@@ -6,6 +6,9 @@
     
         // Create connection
     $conn = new mysqli($servername, $username, $password, $dbname);
+
+        // Set Default time
+    date_default_timezone_set("Asia/Dhaka");
     
         // Check connection
     if ($conn->connect_error) {

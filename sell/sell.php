@@ -107,7 +107,7 @@
 
                             <div class="col-md-6 position-static">
                                 <label for="ppkt">No of Packet</label><br>
-                                <input type="number" min="0" step="1" value="20" placeholder="no of packet" id="pkt" name="pkt" required><br>
+                                <input type="number" min="0" step="1" placeholder="no of packet" id="pkt" name="pkt" required><br>
                             </div>
                         </div>
 
