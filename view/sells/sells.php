@@ -1,8 +1,8 @@
 <?php
-	require_once("../uservelidation.php");
-	require_once("../connect_db.php");
-    $currentPage = "profit";
-	$tProfit = 0;
+	require_once("../../uservelidation.php");
+	require_once("../../connect_db.php");
+    $currentPage = "view";
+	$tPrice = 0;
 	if(isset($_POST["submit"])){
 		$sDate = $_POST["sdate"];
 		$eDate = $_POST["edate"];
@@ -20,20 +20,20 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 	<meta name="robots" content="index, follow" />
-	<title>মুণি ট্রেডার্স &#8211;Admin Panel </title>
+	<title>মুণি ট্রেডার্স &#8211; Sells </title>
 
 
 
 	<!-- SideBar Links -->
-	<link rel='stylesheet' id='doro-themify-icons-css' href='../css/themify-icons76f3.css?ver=5.7.3' type='text/css' media='all' />
-	<link rel='stylesheet' id='doro-bootstrap-css' href='../css/bootstrap76f3.css?ver=5.7.3' type='text/css' media='all' />
-	<link rel='stylesheet' id='doro-style-css' href='../css/style76f3.css?ver=5.7.3' type='text/css' media='all' />
-	<link rel='stylesheet' id='doro-style-dark-css' href='../css/style-dark76f3.css?ver=5.7.3' type='text/css' media='all' />
-	<link rel='stylesheet' id='doro-scrollbar-css' href='../css/scrollbar76f3.css?ver=5.7.3' type='text/css' media='all' />
-	<script type='text/javascript' src='../js/jquery.min9d52.js?ver=3.5.1' id='jquery-core-js'></script>
+	<link rel='stylesheet' id='doro-themify-icons-css' href='../../css/themify-icons76f3.css?ver=5.7.3' type='text/css' media='all' />
+	<link rel='stylesheet' id='doro-bootstrap-css' href='../../css/bootstrap76f3.css?ver=5.7.3' type='text/css' media='all' />
+	<link rel='stylesheet' id='doro-style-css' href='../../css/style76f3.css?ver=5.7.3' type='text/css' media='all' />
+	<link rel='stylesheet' id='doro-style-dark-css' href='../../css/style-dark76f3.css?ver=5.7.3' type='text/css' media='all' />
+	<link rel='stylesheet' id='doro-scrollbar-css' href='../../css/scrollbar76f3.css?ver=5.7.3' type='text/css' media='all' />
+	<script type='text/javascript' src='../../js/jquery.min9d52.js?ver=3.5.1' id='jquery-core-js'></script>
 
 	<!-- Style  -->
-	<link rel="stylesheet" href="..//css/style.css">
+	<link rel="stylesheet" href="../../css/style.css">
 
 	<!-- Font awesome  -->
 	<script src="https://kit.fontawesome.com/6a7e053e4e.js" crossorigin="anonymous"></script>
@@ -82,7 +82,7 @@
 	<div id="doro-page"> <a href="#" class="js-doro-nav-toggle doro-nav-toggle"><i></i></a>
 		<!-- Sidebar Section -->
 		<?php
-			require_once("../side_bar.php");
+			require_once("../../side_bar.php");
 		?>
 
 		<!-- Main Section -->
@@ -92,7 +92,7 @@
 			<div class="banner-top">
 				<div class="row">
 					<div class="col-md-3 col-sm-4 col-6 mg">
-						<h3 class="banner-top-text text-light">PROFIT</h3>
+						<h3 class="banner-top-text text-light">SELLS</h3>
 					</div>
 					<div class="col-md-6 col-sm-7 col-6  only-icon">
 						<button class="btn"> <i class="fas fa-user"></i></button>
@@ -114,16 +114,17 @@
 		
 				<div class="print-container">
 					<div id = "print-heading">
-						<h3 style="text-align:center; font-weight: bold; margin-top:50px">Profit</h3>
+						<h3 style="text-align:center; font-weight: bold; margin-top:50px">Sells</h3>
 					</div>
 					<div class="px-3 mb-3">
-						<h4 style="font-weight:bold; display: inline">Total Profit: </h4>
+						<h4 style="font-weight:bold; display: inline">Total Sells: </h4>
 						<h4 id="tProfit" style="font-weight:bold; color:#4BB543; display: inline">0 </h4>
 						<h4 style="font-weight:bold; display: inline">tk</h4>
 						<h6 id="print-date" class="hide-date" style="font-weight:bold; display: inline; float:right;"> <?php if($sDate == $eDate) {$d = date_create($sDate); echo date_format($d, "d-M-y");}else{$e = date_create($eDate); echo date_format($e, "d.M.y");} ?> </h6>
 						<h6 class="hide-date" style="display: inline; float:right;"> <?php  if($sDate != $eDate){echo ' - ';} ?> </h6>
 						<h6 id="print-date" class="hide-date" style="font-weight:bold; display: inline; float:right;"> <?php if($sDate != $eDate) {$s = date_create($sDate); echo date_format($s, "d.M.y");} ?> </h6>
-						<h6 class="hide-date" style="display: inline; float:right;">Date: </h6>						</div>
+						<h6 class="hide-date" style="display: inline; float:right;">Date: </h6>					
+					</div>
 						
 
 					<div class="px-3 table-responsive">
@@ -131,19 +132,21 @@
 						<table id="myTable" class="table table-striped borderless table-bordered">
 							<thead class="table-dark">
 								<tr>
-								<th class="text-center" scope="col">#</th>
-								<th class="text-center" scope="col">Product</th>
-								<th class="text-center" scope="col">Customer's Mobile</th>
-								<th class="text-center" scope="col">Customer's Name</th>
-								<th class="text-center" scope="col">Date</th>
-								<th class="text-center" scope="col">Time</th>
-								<th class="text-center" scope="col">Profit</th>
+									<th class="text-center" scope="col">#</th>
+									<th class="text-center" scope="col">Product</th>
+									<th class="text-center" scope="col">Mobile No</th>
+									<th class="text-center" scope="col">Name</th>
+									<th class="text-center" scope="col">Date</th>
+									<th class="text-center" scope="col">Time</th>
+									<th class="text-center" scope="col">Quantity</th>
+									<th class="text-center" scope="col">Packet</th>
+									<th class="text-center" scope="col">tPrice</th>
 								</tr>
 							</thead>
 							<tbody>
 								
 								<?php  
-									$sql = "SELECT profit.cid, profit.date, profit.profit, products.name as pname,customers.name as cname FROM profit INNER JOIN products ON profit.pid=products.id INNER JOIN customers ON customers.phn_no = profit.cid where profit.date between '$sDate' and '$enDate' order by profit.date desc";
+									$sql = "SELECT products.name as pname, cid, customers.name as cname, sell.date as date, sell.quantity as qnt, sell.packet as pkt, sell.price as price  FROM sell INNER JOIN products ON sell.pid=products.id INNER JOIN customers ON customers.phn_no = sell.cid where sell.date between '$sDate' and '$enDate' order by sell.date desc";
 									$result = mysqli_query($conn, $sql);
 									$i = 1;
 
@@ -157,9 +160,12 @@
 											$dateTime = $row["date"];
 											$date = date("d-M-Y",strtotime($dateTime));
 											$time = date("h:i A", strtotime($dateTime));
-											$profit = $row["profit"];
+											$uprice = $row["price"];
+											$qnt = $row["qnt"];
+											$pkt = $row["pkt"];
+											$price = $uprice*$qnt;
 											
-											$tProfit += $profit;
+											$tPrice += $price;
 																		
 								?>
 
@@ -170,7 +176,9 @@
 									<td class="text-center" style="color: black;"><?php echo $cname  ?></td>
 									<td class="text-center" style="color: black;"><?php echo $date  ?></td>
 									<td class="text-center" style="color: black;"><?php echo $time  ?></td>
-									<td class="text-center" style="font-weight: bold; color: green;"><?php echo $profit  ?><sub style="color:gray;">ট</sub></td>
+									<td class="text-center" style="color: black;"><?php echo $qnt  ?></td>
+									<td class="text-center" style="color: black;"><?php echo $pkt  ?></td>
+									<td class="text-center" style="font-weight: bold; color: green;"><?php echo $price  ?><sub style="color:gray;">ট</sub></td>
 								</tr>
 
 								<?php     }}      ?>
@@ -201,7 +209,7 @@
 	<script type='text/javascript' src='../js/main5152.js?ver=1.0' id='doro-main-js'></script>
 	<script>
         const logout = () => location.replace("../logout.php");
-		document.getElementById("tProfit").innerHTML = "<?php echo $tProfit ?>";
+		document.getElementById("tProfit").innerHTML = "<?php echo $tPrice ?>";
 		
 		function printDiv(divName) {
 			let printDiv = document.getElementsByClassName(divName)[0];

@@ -1,7 +1,7 @@
 <?php
-	require_once("../uservelidation.php");
-	require_once("../connect_db.php");
-	$currentPage = "stock";
+	require_once("../../uservelidation.php");
+	require_once("../../connect_db.php");
+	$currentPage = "view";
 ?>
 
 <!DOCTYPE html>
@@ -13,26 +13,26 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 	<meta name="robots" content="index, follow" />
-	<title>মুণি ট্রেডার্স &#8211;Admin Panel </title>
+	<title>মুণি ট্রেডার্স &#8211; Sellers </title>
 
 
 	<!-- SideBar Links -->
-	<link rel='stylesheet' id='doro-themify-icons-css' href='../css/themify-icons76f3.css?ver=5.7.3' type='text/css' media='all' />
-	<link rel='stylesheet' id='doro-bootstrap-css' href='../css/bootstrap76f3.css?ver=5.7.3' type='text/css' media='all' />
-	<link rel='stylesheet' id='doro-style-css' href='../css/style76f3.css?ver=5.7.3' type='text/css' media='all' />
-	<link rel='stylesheet' id='doro-style-dark-css' href='../css/style-dark76f3.css?ver=5.7.3' type='text/css' media='all' />
-	<link rel='stylesheet' id='doro-scrollbar-css' href='../css/scrollbar76f3.css?ver=5.7.3' type='text/css' media='all' />
-	<script type='text/javascript' src='../js/jquery.min9d52.js?ver=3.5.1' id='jquery-core-js'></script>
+	<link rel='stylesheet' id='doro-themify-icons-css' href='../../css/themify-icons76f3.css?ver=5.7.3' type='text/css' media='all' />
+	<link rel='stylesheet' id='doro-bootstrap-css' href='../../css/bootstrap76f3.css?ver=5.7.3' type='text/css' media='all' />
+	<link rel='stylesheet' id='doro-style-css' href='../../css/style76f3.css?ver=5.7.3' type='text/css' media='all' />
+	<link rel='stylesheet' id='doro-style-dark-css' href='../../css/style-dark76f3.css?ver=5.7.3' type='text/css' media='all' />
+	<link rel='stylesheet' id='doro-scrollbar-css' href='../../css/scrollbar76f3.css?ver=5.7.3' type='text/css' media='all' />
+	<script type='text/javascript' src='../../js/jquery.min9d52.js?ver=3.5.1' id='jquery-core-js'></script>
 
 	<!-- Style  -->
-	<link rel="stylesheet" href="../css/style.css">
+	<link rel="stylesheet" href="../../css/style.css">
 
 	<!-- Font awesome  -->
 	<script src="https://kit.fontawesome.com/6a7e053e4e.js" crossorigin="anonymous"></script>
 
     <style>
         #myInput {
-            background-image: url('../img/search.png');
+            background-image: url('../../img/search.png');
             background-position: 10px 10px;
             background-repeat: no-repeat;
             width: 100%;
@@ -50,7 +50,7 @@
 	<div id="doro-page"> <a href="#" class="js-doro-nav-toggle doro-nav-toggle"><i></i></a>
 		<!-- Sidebar Section -->
 		<?php
-			require_once("../side_bar.php");
+			require_once("../../side_bar.php");
 		?>
 
 		<!-- Main Section -->
@@ -60,7 +60,7 @@
 			<div class="banner-top">
 				<div class="row">
 					<div class="col-md-3 col-sm-4 col-6 mg">
-						<h3 class="banner-top-text text-light">STOCK</h3>
+						<h3 class="banner-top-text text-light">SELLERS</h3>
 					</div>
 					<div class="col-md-6 col-sm-7 col-6  only-icon">
 						<button class="btn"> <i class="fas fa-user"></i></button>
@@ -77,20 +77,20 @@
 			<!-- Default Page -->
 			<div class="container" style="padding-top: 80px;">
                 <div class="px-3 table-responsive">
-                    <input type="text" id="myInput" onkeyup="mySearchFunction()" placeholder="Search for products..">
+                    <input type="text" id="myInput" onkeyup="mySearchFunction()" placeholder="Search for sellers..">
                     <table id="myTable" class="table table-striped borderless table-bordered">
                         <thead class="table-dark">
                             <tr>
-                            <th style="text-align:center" scope="col">#</th>
-                            <th style="text-align:center" scope="col">Name</th>
-                            <th style="text-align:center" scope="col">Quantity (kg)</th>
-                            <th style="text-align:center" scope="col">Packet</th>
-                            <th style="text-align:center" scope="col">Unit Price</th>
+                                <th style="text-align:center" scope="col">#</th>
+                                <th style="text-align:center" scope="col">Name</th>
+                                <th style="text-align:center" scope="col">Mobile No</th>
+                                <th style="text-align:center" scope="col">Address</th>
+                                <th style="text-align:center" scope="col">Due</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php  
-                                $sql = "SELECT * FROM stock INNER JOIN products ON stock.pid=products.id where quantity > 0 order by products.name";
+                                $sql = "SELECT * FROM sellers order by due";
                                 $result = mysqli_query($conn, $sql);
                                 $i = 1;
 
@@ -98,20 +98,20 @@
                                     // output data of each row
                                     while($row = mysqli_fetch_assoc($result)) {
                                         
-                                        $pid = $row["pid"];
-                                        $qnt = $row["quantity"];
-                                        $pkt = $row["packet"];
+                                        $phn = $row["phn_no"];
                                         $name = $row["name"];
-                                        $price = $row["price"]; 
+                                        $add = $row["address"];
+                                        $due = $row["due"];
+                                        
                                                                        
                             ?>
 
                             <tr>
                                 <th style="text-align:center" scope="row"><?php echo $i++;  ?></th>
-                                <td style="font-weight: bold; color: black; text-align:center"><?php echo $name  ?></td>
-                                <td style="color: black; text-align:center"><?php echo $qnt  ?></td>
-                                <td style="color: black; text-align:center"><?php echo $pkt  ?></td>
-                                <td style="font-weight: bold; color: green; text-align:center"><?php echo $price  ?><sub style="color:gray;">ট</sub></td>
+                                <td style="font-weight: bold;color: black; text-align:center"><?php echo $name  ?></td>
+                                <td style="font-weight: bold; color: green; text-align:center"><?php echo $phn  ?></td>
+                                <td style=" color: black; text-align:center"><?php echo $add  ?></td>
+                                <td style="font-weight: bold; color: red; text-align:center"><?php echo $due  ?><sub style="color:gray;">ট</sub></td>
                             </tr>
 
                             <?php     }}      ?>
@@ -135,10 +135,10 @@
 	<!-- Main end -->
 
 	<!-- SideBar Scripts -->
-	<script type='text/javascript' src='../js/waypoints-min5152.js?ver=1.0' id='waypoints-min-js'></script>
-	<script type='text/javascript' src='../js/main5152.js?ver=1.0' id='doro-main-js'></script>
+	<script type='text/javascript' src='../../js/waypoints-min5152.js?ver=1.0' id='waypoints-min-js'></script>
+	<script type='text/javascript' src='../../js/main5152.js?ver=1.0' id='doro-main-js'></script>
 	<script>
-        const logout = () => location.replace("../logout.php");
+        const logout = () => location.replace("../../logout.php");
 
         function mySearchFunction() {
             var input, filter, table, tr, td, i, txtValue;
@@ -148,9 +148,11 @@
             tr = table.getElementsByTagName("tr");
             for (i = 0; i < tr.length; i++) {
                 td = tr[i].getElementsByTagName("td")[0];
-                if (td) {
+                td1 = tr[i].getElementsByTagName("td")[1];
+                if (td || td1) {
                     txtValue = td.textContent || td.innerText;
-                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    txtValue1 = td1.textContent || td1.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1 || txtValue1.toUpperCase().indexOf(filter) > -1) {
                         tr[i].style.display = "";
                     } else {
                         tr[i].style.display = "none";

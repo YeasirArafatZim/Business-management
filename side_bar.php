@@ -30,7 +30,7 @@
 						class="menu-item menu-item-type-post_type menu-item-object-page menu-item-160"><a class= "<?php echo($currentPage == "profit" ? 'selectedMenu' : '');  ?>" href="/business_management/Profit/profitInput.php">Profit</a>
 					</li>
 					<li>
-						<a class="nav-link dropdown-toggle <?php echo($currentPage == "payment" ? 'selectedMenu' : '');  ?>" class= "" onclick="myFunction()" href="#">
+						<a class="nav-link dropdown-toggle <?php echo($currentPage == "payment" ? 'selectedMenu' : '');  ?>"  onclick="payments()" href="#">
 							Payments
 						</a>
 						<ul class="dropdown-content" id="myDropdown" style="background-color:black;width:100%; overflow:hidden">
@@ -39,19 +39,25 @@
 							
 						</ul>
 					</li>
-					<li id="menu-item-161"
-						class="menu-item menu-item-type-post_type menu-item-object-page menu-item-161"><a href="#">Due</a>
+					<li>
+						<a class="nav-link dropdown-toggle <?php echo($currentPage == "view" ? 'selectedMenu' : '');  ?>"  onclick="view()" href="#">
+							View
+						</a>
+						<ul class="dropdown-content" id="myDropdown1" style="background-color:black;width:100%; overflow:hidden">
+							<li><a class="dropdown-item" style="margin:0px; height:40px;padding-top:10px" href="/business_management/view/customers/customers.php"><p style="text-align:center">Customers</p></a></li>
+							<li><a class="dropdown-item" style="margin:0px; height:40px;padding-top:10px;" href="/business_management/view/sellers/sellers.php"><p style="text-align:center">Sellers</p></a></li>
+							<li><a class="dropdown-item" style="margin:0px; height:40px;padding-top:10px;" href="/business_management/view/sells/inputDate.php"><p style="text-align:center">Sells</p></a></li>
+							<li><a class="dropdown-item" style="margin:0px; height:40px;padding-top:10px;" href="/business_management/view/purchases/inputDate.php"><p style="text-align:center">Purchases</p></a></li>
+						</ul>
 					</li>
 					
-
-				
 
 				</ul>
 			</nav>
 
 
 			<!-- Sidebar Footer -->
-			<div class="doro-footer" style="top:100%"> <!--  -->
+			<div class="doro-footer mt-5" style="position: relative; padding: 0px, margin-top: 30px">
 				<p><small>
 					<p>© মুণি ট্রেডার্স 2021 | All rights reserved.</p>
 				</small></p>
@@ -64,8 +70,7 @@
 		<script>
 			/* When the user clicks on the button, 
 			toggle between hiding and showing the dropdown content */
-			function myFunction() {
-
+			function payments() {
 				let temp = document.getElementById("myDropdown");
 				if(temp.style.display === 'block'){
 					document.getElementById("myDropdown").style.display = "none";
@@ -74,5 +79,13 @@
 				}
 			}
 
+			function view() {
+				let temp = document.getElementById("myDropdown1");
+				if(temp.style.display === 'block'){
+					document.getElementById("myDropdown1").style.display = "none";
+				}else{
+					document.getElementById("myDropdown1").style.display = "block";
+				}
+			}
 			
 		</script>

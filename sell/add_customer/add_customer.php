@@ -48,7 +48,7 @@
 			<div class="banner-top">
 				<div class="row">
 					<div class="col-md-3 col-sm-4 col-6 mg">
-						<h3 class="banner-top-text">SELL</h3>
+						<h3 class="banner-top-text text-light">SELL</h3>
 					</div>
 					<div class="col-md-6 col-sm-7 col-6  only-icon">
 						<button class="btn"> <i class="fas fa-user"></i></button>

@@ -92,7 +92,6 @@ input[type=text], input[type=number],input[type=tel], select {
     border: none;
 }
 
-  
 
 @media (max-width:772px){
     .banner-top-text{

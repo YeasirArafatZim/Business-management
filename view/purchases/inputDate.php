@@ -1,7 +1,7 @@
 <?php
 	require_once("../../uservelidation.php");
 	require_once("../../connect_db.php");
-    $currentPage = "payment";
+    $currentPage = "view";
 ?>
 
 <!DOCTYPE html>
@@ -13,7 +13,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 	<meta name="robots" content="index, follow" />
-	<title>মুণি ট্রেডার্স &#8211; Payments </title>
+	<title>মুণি ট্রেডার্স &#8211; Purchases </title>
 
 
 	<!-- SideBar Links -->
@@ -47,7 +47,7 @@
 			<div class="banner-top">
 				<div class="row">
 					<div class="col-md-3 col-sm-4 col-6 mg">
-						<h3 class="banner-top-text text-light">Seller's Payment</h3>
+						<h3 class="banner-top-text text-light">PURCHASES</h3>
 					</div>
 					<div class="col-md-6 col-sm-7 col-6  only-icon">
 						<button class="btn"> <i class="fas fa-user"></i></button>
@@ -60,41 +60,31 @@
 				</div>
 			</div>
 
-
+		
 			<!-- Default Page -->
-			<div class="container" style="padding-top: 80px">
+			<div class="container" style="padding-top: 80px;">
 
-                <div style="text-align:center; font-weight:bold">
-                    <h3 style="font-weight:bold">Add Seller's Payment</h3>
-                </div>
+				<div style="margin-top: 5%;">
+					<h4 style="font-weight: bold; text-align:center">Select Dates</h4>
+				
 
-                <form action="verify_data.php" method="post">
-                    <div class="box mt-3 mx-auto" style="width:70%;">
-                        
-
-                        <div class="row mt-3 mx-2">
-                            <div class="col-md-12 position-static">
-								<label for="s_phn">Seller's Mobile No</label><br>
-                            	<input type="tel" pattern="[0]{1}[1]{1}[0-9]{9}" placeholder="format: 01758123578" id="s_phn" name="s_phn" required><br>
-                            </div>
-                        </div>
-
-                        <div class="row mt-3 mx-2">
-                            <div class="col-md-12 position-static">
-                                <label for="paid_amount">Paid Amount</label><br>
-                                <input type="number" min="0" step="0.1" placeholder="amount paid to the seller" id="paid_amount" name="paid_amount" required><br>
-                            </div>
+				<form action="purchases.php" method="post">
+					<div class="box row mx-5 py-5">
+						<div class = "px-3 pb-4 col" style="text-align:center">
+							<label>Start Date:</label></br>
+							<input type="date" value="<?php date_default_timezone_set('Asia/Dhaka'); echo date('Y-m-d')  ?>" name="sdate" id="sdate"  >
 						</div>
+						<div class = "px-3 pb-4 col" style="text-align:center">
+							<label>End Date:</label></br>
+							<input type="date" value="<?php date_default_timezone_set('Asia/Dhaka'); echo date('Y-m-d')  ?>" name="edate" id="edate"  >
+						</div>
+					</div>
+					<div style="text-align:center">
+						<input type="submit" name="submit" value="Submit">
+					</div>
+				</form>
 
-
-                        <br><br>
-                    </div>
-
-                    <div style="text-align:center">
-                        <input type="submit" value="Submit" name="submit" class="btnSuccess">
-                    </div>
-                    
-                </form>
+                </div>
 
 
 
@@ -117,13 +107,8 @@
 	<script type='text/javascript' src='../../js/main5152.js?ver=1.0' id='doro-main-js'></script>
 	<script>
         const logout = () => location.replace("../../logout.php");
+		
     </script>
 	
 </body>
 </html>
-<?php  
-		if(isset($_SESSION["msg"] )){
-			echo $_SESSION["msg"];
-			unset($_SESSION["msg"]);
-		}
-?>
