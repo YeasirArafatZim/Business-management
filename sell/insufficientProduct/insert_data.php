@@ -13,6 +13,7 @@
         $pkt = $_SESSION["productPkt"];
         $c_phn = $_SESSION["c_phn"];
         $c_amount = $_SESSION["c_amount"];
+        $cDue = $price*$qnt - $c_amount;
 
 
         $qnt2 = $_SESSION['qnt2'];
@@ -39,11 +40,11 @@
         }
 
         // Add Sell
-        $sql = "INSERT INTO sell VALUES ('', '$pid','$c_phn','$qnt1', '$pkt1','$price', CURRENT_TIMESTAMP )";
+        $sql = "INSERT INTO sell VALUES ('', '$pid','$c_phn','$qnt1', '$pkt1','$price', CURRENT_TIMESTAMP, '$cDue' )";
         if (!mysqli_query($conn, $sql)) {
             echo "Error: " . $sql . "<br>" . mysqli_error($conn);
         }
-        $sql = "INSERT INTO sell VALUES ('', '$pid2','$c_phn','$qnt2', '$pkt2','$price', CURRENT_TIMESTAMP )";
+        $sql = "INSERT INTO sell VALUES ('', '$pid2','$c_phn','$qnt2', '$pkt2','$price', CURRENT_TIMESTAMP, '0' )";
         if (!mysqli_query($conn, $sql)) {
             echo "Error: " . $sql . "<br>" . mysqli_error($conn);
         }

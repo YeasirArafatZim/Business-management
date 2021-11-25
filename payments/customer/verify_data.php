@@ -7,7 +7,11 @@
 		
 		$c_phn = $_POST["c_phn"];
 		$p_amount = $_POST["paid_amount"];
-
+        if(isset($_POST["productName"])){
+            $sell_id = $_POST["productName"];
+            $_SESSION['sell_id'] = $sell_id;
+        }
+        
         $_SESSION['c_phn'] = $c_phn;
         $_SESSION['c_amount'] = $p_amount;
 
@@ -126,6 +130,7 @@
                             <p class="verify_data"><?php echo $p_amount?></p>
                         </div>
                     </div>
+
                     <?php }else{ ?>
 
                         <h4 class="mx-auto text-center">This Customer don't have any purchase history. Please check Mobile no.</h4>

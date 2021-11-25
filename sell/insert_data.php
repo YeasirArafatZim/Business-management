@@ -12,6 +12,7 @@
         $pkt = $_SESSION["productPkt"];
         $c_phn = $_SESSION["c_phn"];
         $c_amount = $_SESSION["c_amount"];
+        $cDue = $price*$qnt - $c_amount;
 
         $sql = "SELECT * FROM customers WHERE phn_no = '$c_phn'";
         $result = mysqli_query($conn, $sql);
@@ -20,7 +21,7 @@
             // Customer already added
 
             // Add Sell
-            $sql = "INSERT INTO sell VALUES ('', '$pid','$c_phn','$qnt', '$pkt','$price', CURRENT_TIMESTAMP )";
+            $sql = "INSERT INTO sell VALUES ('', '$pid','$c_phn','$qnt', '$pkt','$price', CURRENT_TIMESTAMP, '$cDue' )";
             if (!mysqli_query($conn, $sql)) {
                 echo "Error: " . $sql . "<br>" . mysqli_error($conn);
             }

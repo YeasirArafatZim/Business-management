@@ -3,6 +3,7 @@
 	require_once("../../connect_db.php");
     $currentPage = "view";
 	$tPrice = 0;
+	$tDue = 0;
 	if(isset($_POST["submit"])){
 		$sDate = $_POST["sdate"];
 		$eDate = $_POST["edate"];
@@ -39,6 +40,16 @@
 	<script src="https://kit.fontawesome.com/6a7e053e4e.js" crossorigin="anonymous"></script>
 
 	<style>
+		#myInput {
+            background-image: url('../../img/search.png');
+            background-position: 10px 10px;
+            background-repeat: no-repeat;
+            font-size: 16px;
+            padding: 12px 40px 12px 40px;
+            border: 1px solid #ddd;
+            margin-bottom: 25px;
+			width: 50%;
+		}
 		.hide-date{
 			visibility: hidden;
 		}
@@ -108,6 +119,9 @@
 		
 			<!-- Default Page -->
 			<div class="container" style="padding-top: 80px;">
+				<div>
+					<input style="text-align: center;" type="text" id="myInput" onkeyup="mySearchFunction()" placeholder="Search here..">
+				</div>
 				<div class="px-3 mb-2">
 				<button type="button" onclick="printDiv('print-container')" class="btn" style="background-color: #53C222;">Print</button>
 				</div>
@@ -120,6 +134,11 @@
 						<h4 style="font-weight:bold; display: inline">Total Sells: </h4>
 						<h4 id="tProfit" style="font-weight:bold; color:#4BB543; display: inline">0 </h4>
 						<h4 style="font-weight:bold; display: inline">tk</h4>
+
+						<h4 style="font-weight:bold; display: inline; margin-left:20%">Total Dues: </h4>
+						<h4 id="tDue" style="font-weight:bold; color:red; display: inline">0 </h4>
+						<h4 style="font-weight:bold; display: inline">tk</h4>
+
 						<h6 id="print-date" class="hide-date" style="font-weight:bold; display: inline; float:right;"> <?php if($sDate == $eDate) {$d = date_create($sDate); echo date_format($d, "d-M-y");}else{$e = date_create($eDate); echo date_format($e, "d.M.y");} ?> </h6>
 						<h6 class="hide-date" style="display: inline; float:right;"> <?php  if($sDate != $eDate){echo ' - ';} ?> </h6>
 						<h6 id="print-date" class="hide-date" style="font-weight:bold; display: inline; float:right;"> <?php if($sDate != $eDate) {$s = date_create($sDate); echo date_format($s, "d.M.y");} ?> </h6>
@@ -140,13 +159,14 @@
 									<th class="text-center" scope="col">Time</th>
 									<th class="text-center" scope="col">Quantity</th>
 									<th class="text-center" scope="col">Packet</th>
+									<th class="text-center" scope="col">Due</th>
 									<th class="text-center" scope="col">tPrice</th>
 								</tr>
 							</thead>
 							<tbody>
 								
 								<?php  
-									$sql = "SELECT products.name as pname, cid, customers.name as cname, sell.date as date, sell.quantity as qnt, sell.packet as pkt, sell.price as price  FROM sell INNER JOIN products ON sell.pid=products.id INNER JOIN customers ON customers.phn_no = sell.cid where sell.date between '$sDate' and '$enDate' order by sell.date desc";
+									$sql = "SELECT products.name as pname, cid, customers.name as cname, sell.date as date, sell.quantity as qnt, sell.packet as pkt, sell.price as price, sell.due as due  FROM sell INNER JOIN products ON sell.pid=products.id INNER JOIN customers ON customers.phn_no = sell.cid where sell.date between '$sDate' and '$enDate' order by sell.date desc";
 									$result = mysqli_query($conn, $sql);
 									$i = 1;
 
@@ -164,7 +184,9 @@
 											$qnt = $row["qnt"];
 											$pkt = $row["pkt"];
 											$price = $uprice*$qnt;
-											
+											$due = $row['due'];
+
+											$tDue += $due;
 											$tPrice += $price;
 																		
 								?>
@@ -178,6 +200,7 @@
 									<td class="text-center" style="color: black;"><?php echo $time  ?></td>
 									<td class="text-center" style="color: black;"><?php echo $qnt  ?></td>
 									<td class="text-center" style="color: black;"><?php echo $pkt  ?></td>
+									<td class="text-center" style="font-weight: bold; color: red;"><?php echo $due  ?><sub style="color:gray;">ট</sub></td>
 									<td class="text-center" style="font-weight: bold; color: green;"><?php echo $price  ?><sub style="color:gray;">ট</sub></td>
 								</tr>
 
@@ -210,6 +233,7 @@
 	<script>
         const logout = () => location.replace("../logout.php");
 		document.getElementById("tProfit").innerHTML = "<?php echo $tPrice ?>";
+		document.getElementById("tDue").innerHTML = "<?php echo $tDue ?>";
 		
 		function printDiv(divName) {
 			let printDiv = document.getElementsByClassName(divName)[0];
@@ -218,6 +242,27 @@
 			a.appendChild(printDiv);
 			window.print();
 		}
+
+		function mySearchFunction() {
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("myInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("myTable");
+            tr = table.getElementsByTagName("tr");
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[1];
+                td1 = tr[i].getElementsByTagName("td")[2];
+                if (td || td1) {
+                    txtValue = td.textContent || td.innerText;
+                    txtValue1 = td1.textContent || td1.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1 || txtValue1.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }       
+            }
+        }
 		
     </script>
 

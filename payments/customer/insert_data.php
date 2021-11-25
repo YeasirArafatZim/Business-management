@@ -6,6 +6,7 @@
 
         $c_phn = $_SESSION["c_phn"];
         $c_amount = $_SESSION["c_amount"];
+        $sell_id = $_SESSION['sell_id'];
         
         
         if($c_amount > 0 ){
@@ -14,6 +15,18 @@
             if (!mysqli_query($conn, $sql)) {
                 echo "Error: " . $sql . "<br>" . mysqli_error($conn);
             }
+
+            // Update sells due
+            $sql = "SELECT due FROM sell WHERE id = '$sell_id'";
+            $result = mysqli_query($conn, $sql);
+            $row = mysqli_fetch_assoc($result);
+            $due = $row["due"];
+            $due = $due - $c_amount;
+            $sql = "UPDATE sell SET due = '$due' WHERE id = '$sell_id'";
+            if (!mysqli_query($conn, $sql)) {
+                echo "Error updating due in sell table: " . mysqli_error($conn);
+            }
+
         }
 
         // Update Customer

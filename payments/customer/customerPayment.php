@@ -30,6 +30,26 @@
 	<!-- Font awesome  -->
 	<script src="https://kit.fontawesome.com/6a7e053e4e.js" crossorigin="anonymous"></script>
 
+
+	<!-- AJAX  -->
+	<script>
+		function showOption(str) {
+			if (str == "") {
+				document.getElementById("showOption").innerHTML = "";
+				return;
+			} else {
+				var xmlhttp = new XMLHttpRequest();
+				xmlhttp.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+					document.getElementById("showOption").innerHTML = this.responseText;
+				}
+				};
+				xmlhttp.open("GET","showOption.php?p="+str,true);
+				xmlhttp.send();
+			}
+		}
+	</script>
+
 </head>
 
 <body class="home page-template-default page page-id-158 wpb-js-composer js-comp-ver-6.6.0 vc_responsive">
@@ -75,17 +95,13 @@
                         <div class="row mt-3 mx-2">
                             <div class="col-md-12 position-static">
 								<label for="c_phn">Customer's Mobile No</label><br>
-                            	<input type="tel" pattern="[0]{1}[1]{1}[0-9]{9}" placeholder="format: 01758123578" id="c_phn" name="c_phn" required><br>
+                            	<input type="tel" pattern="[0]{1}[1]{1}[0-9]{9}" onchange="showOption(this.value)" placeholder="format: 01758123578" id="c_phn" name="c_phn" required><br>
                             </div>
                         </div>
 
-                        <div class="row mt-3 mx-2">
-                            <div class="col-md-12 position-static">
-                                <label for="paid_amount">Paid Amount</label><br>
-                                <input type="number" min="0" step="0.1" placeholder="amount paid to the seller" id="paid_amount" name="paid_amount" required><br>
-                            </div>
+						<!-- Hidden Options  -->
+						<div  id="showOption">
 						</div>
-
 
                         <br><br>
                     </div>
