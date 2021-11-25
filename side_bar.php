@@ -15,7 +15,7 @@
 				<ul>
 					<li id="menu-item-162"
 						class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-158 current_page_item menu-item-162">
-						<a href="../home/" class= "<?php echo($currentPage == "home" ? 'selectedMenu' : '');  ?>" aria-current="page">Dashboard</a>
+						<a href="/business_management/home/" class= "<?php echo($currentPage == "home" ? 'selectedMenu' : '');  ?>" aria-current="page">Dashboard</a>
 					</li>
 					<li id="menu-item-159" 
 						class="menu-item menu-item-type-post_type menu-item-object-page menu-item-159"><a class= "<?php echo($currentPage == "purchase" ? 'selectedMenu' : '');  ?>" href="/business_management/purchase/">Purchase</a>

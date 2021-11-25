@@ -30,6 +30,12 @@
 	<!-- Font awesome  -->
 	<script src="https://kit.fontawesome.com/6a7e053e4e.js" crossorigin="anonymous"></script>
 
+	<!-- jquery  -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+	<script src = "https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.jquery.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.min.css">
 
 </head>
 
@@ -75,9 +81,9 @@
 
                         <div class="row mt-4 mx-1">
                             <div class="col-md-6 position-static">
-                                <label for="productName">Product Name</label><br>
+                                <label style="margin-bottom:20px;">Product Name <p style="margin:0px; color:red; display: inline" id="error"></p></label><br>
 								
-                                <select name="productName" id="productName" required>
+                                <select style="widht:100%;" class="chosen" name="productName" id="productName" required>
                                     <option value="" disabled selected>--Select a Product--</option>
                                     <?php
                                         if (mysqli_num_rows($result) > 0) {
@@ -127,7 +133,7 @@
                     </div>
 
                     <div style="text-align:center">
-                            <input type="submit" value="Submit" name="submit">
+                            <input id="submit" type="submit" value="Submit" name="submit">
                     </div>
                 </form>
 
@@ -153,9 +159,24 @@
 
 		
     </script>
+	<script>
+	$(document).ready(function()
+	{
+		$("#submit").click(function(){
+			var temp = $("#productName");
+			if(temp.val() == null)
+			{
+				document.getElementById("error").innerHTML = "Select a product";
+			}
+		});
+	});	
+</script>
 
 
 </body>
+<script type="text/javascript">
+	$(".chosen").chosen();								
+</script>
 </html>
 
 <?php  

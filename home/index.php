@@ -2,6 +2,37 @@
 	require_once("../uservelidation.php");
 	require_once("../connect_db.php");
 	$currentPage = "home";
+
+	$sql = "select sum(profit) as tProfit from profit";
+	$result = mysqli_query($conn, $sql);
+	$row = mysqli_fetch_assoc($result);
+	$tProfit = $row['tProfit'];
+
+	$sql = "select sum(quantity*price) as result from sell";
+	$result = mysqli_query($conn, $sql);
+	$row = mysqli_fetch_assoc($result);
+	$sells = $row['result'];
+
+	$sql = "select sum(due) as dues from customers";
+	$result = mysqli_query($conn, $sql);
+	$row = mysqli_fetch_assoc($result);
+	$dues = $row['dues'];
+
+	$sql = "select sum(quantity*price) as result from purchase";
+	$result = mysqli_query($conn, $sql);
+	$row = mysqli_fetch_assoc($result);
+	$purchases = $row['result'];
+
+	$sql = "select count(phn_no) as result from sellers";
+	$result = mysqli_query($conn, $sql);
+	$row = mysqli_fetch_assoc($result);
+	$sellers = $row['result'];
+
+	$sql = "select count(phn_no) as result from customers";
+	$result = mysqli_query($conn, $sql);
+	$row = mysqli_fetch_assoc($result);
+	$customers = $row['result'];
+	
 ?>
 
 <!DOCTYPE html>
@@ -62,12 +93,73 @@
 
 
 			<!-- Default Page -->
-			<div class="container" style="padding-top: 80px">
+			<div class="container" style="padding-top: 140px">
 
 
+				<div class="row pb-5 ml-2">
+					<div class="col position-static">
+						<div class="card text-white bg-success mb-3 position-static" style="max-width: 18rem;">
+							<div class="card-header" style="font-size:20px">Profits</div>
+							<div class="card-body">
+								<h5 class="card-title" style="color:black">Total Profit</h5>
+								<p class="card-text" style="color:white; font-size:18px;font-weight:bold"><?php echo $tProfit; ?></p>
+							</div>
+						</div>
+					</div>
 
+					<div class="col position-static">
+						<div class="card text-white bg-primary mb-3 position-static" style="max-width: 18rem;">
+							<div class="card-header" style="font-size:20px">Sells</div>
+							<div class="card-body">
+								<h5 class="card-title" style="color:black">Total Sell</h5>
+								<p class="card-text" style="color:white; font-size:18px;font-weight:bold"><?php echo $sells; ?></p>
+							</div>
+						</div>
+					</div>
 
-			</div>
+					<div class="col position-static">
+						<div class="card text-white bg-danger mb-3 position-static" style="max-width: 18rem;">
+							<div class="card-header" style="font-size:20px">Dues</div>
+							<div class="card-body">
+								<h5 class="card-title" style="color:black">Total Due</h5>
+								<p class="card-text" style="color:white; font-size:18px;font-weight:bold"><?php echo $dues; ?></p>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			
+				<div class="row ml-2">
+					<div class="col position-static">
+						<div class="card text-white bg-warning mb-3 position-static" style="max-width: 18rem;">
+							<div class="card-header" style="font-size:20px">Purchases</div>
+							<div class="card-body">
+								<h5 class="card-title" style="color:black">Total Purchase</h5>
+								<p class="card-text" style="color:white; font-size:18px;font-weight:bold"><?php echo $purchases; ?></p>
+							</div>
+						</div>
+					</div>
+
+					<div class="col position-static">
+						<div class="card text-white bg-secondary mb-3 position-static" style="max-width: 18rem;">
+							<div class="card-header" style="font-size:20px">Sellers</div>
+							<div class="card-body">
+								<h5 class="card-title" style="color:black">Total Seller</h5>
+								<p class="card-text" style="color:white; font-size:18px;font-weight:bold"><?php echo $sellers; ?></p>
+							</div>
+						</div>
+					</div>
+
+					<div class="col position-static">
+						<div class="card text-white bg-info mb-3 position-static" style="max-width: 18rem;">
+							<div class="card-header" style="font-size:20px">Customers</div>
+							<div class="card-body">
+								<h5 class="card-title" style="color:black">Total Customer</h5>
+								<p class="card-text" style="color:white; font-size:18px;font-weight:bold"><?php echo $customers; ?></p>
+							</div>
+						</div>
+					</div>
+				</div>
 
 
 
