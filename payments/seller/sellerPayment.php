@@ -50,8 +50,8 @@
 						<h3 class="banner-top-text text-light">Seller's Payment</h3>
 					</div>
 					<div class="col-md-6 col-sm-7 col-6  only-icon">
+						<button onclick="logout()" class="btn"><i class="fas fa-sign-out-alt"></i></button>
 						<button class="btn"> <i class="fas fa-user"></i></button>
-						<button class="btn"><i class="fas fa-sign-out-alt"></i></button>
 					</div>
 					<div class="col-md-5 col-sm-4 with-icon">
 						<button onclick="logout()" class="btn"><i class="fas fa-sign-out-alt"> LogOut</i></button>

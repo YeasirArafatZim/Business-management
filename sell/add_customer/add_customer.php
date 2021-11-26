@@ -51,8 +51,8 @@
 						<h3 class="banner-top-text text-light">SELL</h3>
 					</div>
 					<div class="col-md-6 col-sm-7 col-6  only-icon">
+						<button onclick="logout()" class="btn"><i class="fas fa-sign-out-alt"></i></button>
 						<button class="btn"> <i class="fas fa-user"></i></button>
-						<button class="btn"><i class="fas fa-sign-out-alt"></i></button>
 					</div>
 					<div class="col-md-5 col-sm-4 with-icon">
 						<button onclick="logout()" class="btn"><i class="fas fa-sign-out-alt"> LogOut</i></button>
@@ -126,7 +126,7 @@
 	<script type='text/javascript' src='../../js/waypoints-min5152.js?ver=1.0' id='waypoints-min-js'></script>
 	<script type='text/javascript' src='../../js/main5152.js?ver=1.0' id='doro-main-js'></script>
     <script>
-        const logout = () => location.replace("../logout.php");
+        const logout = () => location.replace("../../logout.php");
     </script>
 
 	

@@ -37,6 +37,26 @@
 	<script src = "https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.jquery.min.js"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.min.css">
 
+	<!-- AJAX  -->
+	<script>
+		function checkPkt(str) {
+			let pid = document.getElementById("productName").value;
+			if (str == "" || pid == "") {
+				document.getElementById("pkt").value = "0";
+				return;
+			} else {
+				var xmlhttp = new XMLHttpRequest();
+				xmlhttp.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+					document.getElementById("pkt").value = this.responseText;
+				}
+				};
+				xmlhttp.open("GET","checkPkt.php?q="+ str +"&p="+pid,true);
+				xmlhttp.send();
+			}
+		}
+	</script>
+
 </head>
 
 <body class="home page-template-default page page-id-158 wpb-js-composer js-comp-ver-6.6.0 vc_responsive">
@@ -57,8 +77,8 @@
 						<h3 class="banner-top-text text-light">SELL</h3>
 					</div>
 					<div class="col-md-6 col-sm-7 col-6  only-icon">
+						<button onclick="logout()" class="btn"><i class="fas fa-sign-out-alt"></i></button>
 						<button class="btn"> <i class="fas fa-user"></i></button>
-						<button class="btn"><i class="fas fa-sign-out-alt"></i></button>
 					</div>
 					<div class="col-md-5 col-sm-4 with-icon">
 						<button onclick="logout()" class="btn"><i class="fas fa-sign-out-alt"> LogOut</i></button>
@@ -108,7 +128,7 @@
                         <div class="row mt-3 mx-2">
                             <div class="col-md-6 position-static">
                                 <label for="pqnt">Quantity (kg)</label><br>
-                                <input type="number" step="any" min="0" onchange="calcPkt()"  placeholder="product quantity in kg" id="qnt" name="qnt" required>
+                                <input type="number" step="any" min="0" onchange="checkPkt(this.value)"  placeholder="product quantity in kg" id="qnt" name="qnt" required>
                             </div>
 
                             <div class="col-md-6 position-static">

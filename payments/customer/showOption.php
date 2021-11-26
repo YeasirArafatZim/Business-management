@@ -29,7 +29,7 @@ if (mysqli_num_rows($result) > 0) {
                                     $date = date("j M,Y  h:i A", $date);
                                 ?>
                                     <option value= <?php echo $row["id"] ?>> <?php echo $row["due"]; ?>tk &nbsp;&nbsp;&nbsp;  (<?php echo $date; ?>) &nbsp;&nbsp;&nbsp;(<?php echo $row["name"];?> ) </option>
-                    <?php  }}} ?>
+                    <?php  }} ?>
         </select>
     </div>
 </div>
@@ -43,6 +43,7 @@ if (mysqli_num_rows($result) > 0) {
 
 
 <?php
+}
 mysqli_close($conn);
 ?>
 </body>

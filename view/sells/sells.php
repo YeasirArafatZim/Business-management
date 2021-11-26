@@ -33,6 +33,7 @@
 	<link rel='stylesheet' id='doro-scrollbar-css' href='../../css/scrollbar76f3.css?ver=5.7.3' type='text/css' media='all' />
 	<script type='text/javascript' src='../../js/jquery.min9d52.js?ver=3.5.1' id='jquery-core-js'></script>
 
+
 	<!-- Style  -->
 	<link rel="stylesheet" href="../../css/style.css">
 
@@ -106,7 +107,7 @@
 						<h3 class="banner-top-text text-light">SELLS</h3>
 					</div>
 					<div class="col-md-6 col-sm-7 col-6  only-icon">
-						<button class="btn"> <i class="fas fa-user"></i></button>
+						<button class="btn" onclick="logout()"> <i class="fas fa-user"></i></button>
 						<button class="btn"><i class="fas fa-sign-out-alt"></i></button>
 					</div>
 					<div class="col-md-5 col-sm-4 with-icon">
@@ -228,10 +229,10 @@
 	<!-- Main end -->
 
 	<!-- SideBar Scripts -->
-	<script type='text/javascript' src='../js/waypoints-min5152.js?ver=1.0' id='waypoints-min-js'></script>
-	<script type='text/javascript' src='../js/main5152.js?ver=1.0' id='doro-main-js'></script>
+	<script type='text/javascript' src='../../js/waypoints-min5152.js?ver=1.0' id='waypoints-min-js'></script>
+	<script type='text/javascript' src='../../js/main5152.js?ver=1.0' id='doro-main-js'></script>
 	<script>
-        const logout = () => location.replace("../logout.php");
+        const logout = () => location.replace("../../logout.php");
 		document.getElementById("tProfit").innerHTML = "<?php echo $tPrice ?>";
 		document.getElementById("tDue").innerHTML = "<?php echo $tDue ?>";
 		

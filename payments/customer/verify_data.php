@@ -6,14 +6,17 @@
 	if(isset($_POST["submit"])){
 		
 		$c_phn = $_POST["c_phn"];
-		$p_amount = $_POST["paid_amount"];
+        $_SESSION['c_phn'] = $c_phn;
+		
         if(isset($_POST["productName"])){
             $sell_id = $_POST["productName"];
             $_SESSION['sell_id'] = $sell_id;
         }
         
-        $_SESSION['c_phn'] = $c_phn;
-        $_SESSION['c_amount'] = $p_amount;
+        if(isset($_POST["paid_amount"])){
+            $p_amount = $_POST["paid_amount"];
+            $_SESSION['c_amount'] = $p_amount;
+        }
 
         $sql = "SELECT * FROM customers WHERE phn_no = '$c_phn'";
         $result = mysqli_query($conn, $sql);
@@ -69,8 +72,8 @@
 						<h3 class="banner-top-text text-light">Customer's Payment</h3>
 					</div>
 					<div class="col-md-6 col-sm-7 col-6  only-icon">
+                        <button onclick="logout()" class="btn"><i class="fas fa-sign-out-alt"></i></button>
 						<button class="btn"> <i class="fas fa-user"></i></button>
-						<button class="btn"><i class="fas fa-sign-out-alt"></i></button>
 					</div>
 					<div class="col-md-5 col-sm-4 with-icon">
 						<button onclick="logout()" class="btn"><i class="fas fa-sign-out-alt"> LogOut</i></button>
