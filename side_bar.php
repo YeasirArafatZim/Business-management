@@ -39,6 +39,18 @@
 							
 						</ul>
 					</li>
+
+					<li>
+						<a class="nav-link dropdown-toggle <?php echo($currentPage == "viewPayment" ? 'selectedMenu' : '');  ?>"  onclick="vpayments()" href="#">
+							View Payments
+						</a>
+						<ul class="dropdown-content" id="myDropdown2" style="background-color:black;width:100%; overflow:hidden">
+							<li><a class="dropdown-item" style="margin:0px; height:40px;padding-top:10px" href="/business_management/viewPayments/customers/inputDate.php"><p style="text-align:center">Customer's</p></a></li>
+							<li><a class="dropdown-item" style="margin:0px; height:40px;padding-top:10px;" href="/business_management/viewPayments/sellers/inputDate.php"><p style="text-align:center">Seller's</p></a></li>
+							
+						</ul>
+					</li>
+
 					<li>
 						<a class="nav-link dropdown-toggle <?php echo($currentPage == "view" ? 'selectedMenu' : '');  ?>"  onclick="view()" href="#">
 							View
@@ -76,6 +88,15 @@
 					document.getElementById("myDropdown").style.display = "none";
 				}else{
 					document.getElementById("myDropdown").style.display = "block";
+				}
+			}
+
+			function vpayments() {
+				let temp = document.getElementById("myDropdown2");
+				if(temp.style.display === 'block'){
+					document.getElementById("myDropdown2").style.display = "none";
+				}else{
+					document.getElementById("myDropdown2").style.display = "block";
 				}
 			}
 

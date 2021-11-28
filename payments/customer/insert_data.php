@@ -30,15 +30,20 @@
         }
 
         // Update Customer
-        $sql = "SELECT paid, due FROM customers WHERE phn_no = '$c_phn'";
+        $sql = "SELECT cost,paid, due FROM customers WHERE phn_no = '$c_phn'";
         $result = mysqli_query($conn, $sql);
         $row = mysqli_fetch_assoc($result);
 
+        $cost = $row["cost"];
         $paid = $row["paid"];
         $due = $row["due"];
 
         $new_paid = $paid + $c_amount;
         $new_due = $due - $c_amount;
+
+        // Sending Message
+        require_once("../../customerMessage.php");
+        sendCustomerMessage($c_phn, $cost, $c_amount, $new_due);
 
         $sql = "UPDATE customers SET paid = '$new_paid', due = '$new_due' WHERE phn_no = '$c_phn'";
         if (!mysqli_query($conn, $sql)) {
