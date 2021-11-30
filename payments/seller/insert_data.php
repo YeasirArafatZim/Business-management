@@ -10,7 +10,7 @@
         
         if($p_amount > 0 ){
             // Insert Customer Payment
-            $sql = "INSERT INTO seller_payment VALUES ('', '$s_phn','$p_amount', CURRENT_TIMESTAMP )";
+            $sql = "INSERT INTO seller_payment VALUES (DEFAULT, '$s_phn','$p_amount', CURRENT_TIMESTAMP )";
             if (!mysqli_query($conn, $sql)) {
                 echo "Error: " . $sql . "<br>" . mysqli_error($conn);
             }

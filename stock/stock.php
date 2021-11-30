@@ -82,15 +82,17 @@
                         <thead class="table-dark">
                             <tr>
                             <th style="text-align:center" scope="col">#</th>
-                            <th style="text-align:center" scope="col">Name</th>
+                            <th style="text-align:center" scope="col">Product Name</th>
                             <th style="text-align:center" scope="col">Quantity (kg)</th>
                             <th style="text-align:center" scope="col">Packet</th>
+                            <th style="text-align:center" scope="col">Seller Mobile</th>
+                            <th style="text-align:center" scope="col">Seller Name</th>
                             <th style="text-align:center" scope="col">Unit Price</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php  
-                                $sql = "SELECT * FROM stock INNER JOIN products ON stock.pid=products.id where quantity > 0 order by products.name";
+                                $sql = "SELECT stock.pid as pid, stock.quantity as quantity, stock.packet as packet, products.name as name, products.price as price, sellers.phn_no as s_phn, sellers.name as s_name  FROM stock INNER JOIN products ON stock.pid=products.id INNER JOIN sellers on products.sid=sellers.phn_no where stock.quantity > 0 order by products.name";
                                 $result = mysqli_query($conn, $sql);
                                 $i = 1;
 
@@ -102,7 +104,9 @@
                                         $qnt = $row["quantity"];
                                         $pkt = $row["packet"];
                                         $name = $row["name"];
-                                        $price = $row["price"]; 
+                                        $price = $row["price"];
+                                        $s_phn = $row["s_phn"];
+                                        $s_name = $row["s_name"];
                                                                        
                             ?>
 
@@ -110,7 +114,9 @@
                                 <th style="text-align:center" scope="row"><?php echo $i++;  ?></th>
                                 <td style="font-weight: bold; color: black; text-align:center"><?php echo $name  ?></td>
                                 <td style="color: black; text-align:center"><?php echo $qnt  ?></td>
-                                <td style="color: black; text-align:center"><?php echo $pkt  ?></td>
+                                <td style="color: black; text-align:center"><?php echo $pkt ?></td>
+                                <td style="color: black; text-align:center"><?php echo $s_phn ?></td>
+                                <td style="color: black; text-align:center"><?php echo $s_name  ?></td>
                                 <td style="font-weight: bold; color: green; text-align:center"><?php echo $price  ?><sub style="color:gray;">ট</sub></td>
                             </tr>
 
@@ -148,9 +154,13 @@
             tr = table.getElementsByTagName("tr");
             for (i = 0; i < tr.length; i++) {
                 td = tr[i].getElementsByTagName("td")[0];
-                if (td) {
+                td1 = tr[i].getElementsByTagName("td")[3];
+                td2 = tr[i].getElementsByTagName("td")[4];
+                if (td || td1) {
                     txtValue = td.textContent || td.innerText;
-                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    txtValue1 = td1.textContent || td1.innerText;
+                    txtValue2 = td2.textContent || td2.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1 || txtValue1.toUpperCase().indexOf(filter) > -1 || txtValue2.toUpperCase().indexOf(filter) > -1  ) {
                         tr[i].style.display = "";
                     } else {
                         tr[i].style.display = "none";

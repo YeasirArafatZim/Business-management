@@ -11,7 +11,7 @@
         
         if($c_amount > 0 ){
             // Insert Customer Payment
-            $sql = "INSERT INTO customer_payment VALUES ('', '$c_phn','$c_amount', CURRENT_TIMESTAMP )";
+            $sql = "INSERT INTO customer_payment VALUES (DEFAULT, '$c_phn','$c_amount', CURRENT_TIMESTAMP )";
             if (!mysqli_query($conn, $sql)) {
                 echo "Error: " . $sql . "<br>" . mysqli_error($conn);
             }

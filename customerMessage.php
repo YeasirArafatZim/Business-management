@@ -1,7 +1,7 @@
 <?php
     function sendCustomerMessage($to, $pur, $paid, $due) {
 
-        $msg = "==মুনি ট্রেডার্স==\nমোট ক্রয়ঃ ". $pur ."টাকা\nজমা: ". $paid ."টাকা\nমোট বাকি: ". $due. "100টাকা\nমোবাইল নং: ০১৭১১৭১৩৭৮১";
+        $msg = "==মুনি ট্রেডার্স==\nমোট ক্রয়ঃ ". $pur ."টাকা\nজমা: ". $paid ."টাকা\nমোট বাকি: ". $due. "টাকা\nমোবাইল নং: ০১৭১১৭১৩৭৮১";
         $token = "d92c864aa7fa8e3ff5202a7fc1cbb541";
 
         $url = "https://api.greenweb.com.bd/api.php";

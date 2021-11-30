@@ -25,7 +25,7 @@
         }
 
         // Add Sell
-        $sql = "INSERT INTO sell VALUES ('', '$pid','$c_phn','$qnt', '$pkt','$price', CURRENT_TIMESTAMP, '$cDue' )";
+        $sql = "INSERT INTO sell VALUES (DEFAULT, '$pid','$c_phn','$qnt', '$pkt','$price', CURRENT_TIMESTAMP, '$cDue' )";
         if (!mysqli_query($conn, $sql)) {
             echo "Error: " . $sql . "<br>" . mysqli_error($conn);
         }
@@ -51,14 +51,14 @@
         $row = mysqli_fetch_assoc($result);
         $profit = ($price - $row["price"]) * $qnt;
 
-        $sql = "INSERT INTO profit VALUES ('', '$pid','$c_phn', CURRENT_TIMESTAMP, '$profit' )";
+        $sql = "INSERT INTO profit VALUES (DEFAULT, '$pid','$c_phn', CURRENT_TIMESTAMP, '$profit' )";
         if (!mysqli_query($conn, $sql)) {
             echo "Error: " . $sql . "<br>" . mysqli_error($conn);
         }
 
         // Add Customer payment
         if($c_amount > 0 ){
-            $sql = "INSERT INTO customer_payment VALUES ('', '$c_phn','$c_amount', CURRENT_TIMESTAMP )";
+            $sql = "INSERT INTO customer_payment VALUES (DEFAULT, '$c_phn','$c_amount', CURRENT_TIMESTAMP )";
             if (!mysqli_query($conn, $sql)) {
                 echo "Error: " . $sql . "<br>" . mysqli_error($conn);
             }

@@ -1,12 +1,18 @@
 <?php
 	require_once("../uservelidation.php");
 	require_once("../connect_db.php");
+    $currentPage = "purchase";
     $pname = $_SESSION["pname"];
     $price = $_SESSION["pprice"];
     $qnt = $_SESSION["qnt"];
     $pkt = $_SESSION["pkt"];
     $s_phn = $_SESSION["s_phn"];
     $p_amount = $_SESSION["amount"];
+
+    $sql = "select name from sellers where phn_no = '$s_phn'";
+    $result = mysqli_query($conn, $sql);
+    $row = mysqli_fetch_assoc($result);
+    $s_name = $row["name"];
 ?>
 
 <!DOCTYPE html>
@@ -119,10 +125,18 @@
                     </div>
                     <div class="row">
                         <div class="col-md-6 col-sm-6 col-6 position-static">
+                            <p class="verify_label">Seller's Name: </p>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-6 position-static">
+                            <p class="verify_data"> <?php   echo "$s_name"; ?> </p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-6 position-static">
                             <p class="verify_label">Paid amount: </p>
                         </div>
                         <div class="col-md-6 col-sm-6 col-6 position-static">
-                            <p class="verify_data"><?php echo $p_amount?></p>
+                            <p class="verify_data"><?php echo $p_amount; ?></p>
                         </div>
                     </div>
 

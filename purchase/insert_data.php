@@ -21,7 +21,7 @@
             $pid = $row["id"];
 
             // Add Purchase
-            $sql = "INSERT INTO purchase VALUES ('', '$pid','$qnt', '$pkt','$price', CURRENT_TIMESTAMP )";
+            $sql = "INSERT INTO purchase VALUES (DEFAULT, '$pid','$qnt', '$pkt','$price', CURRENT_TIMESTAMP )";
             if (!mysqli_query($conn, $sql)) {
                 echo "Error: " . $sql . "<br>" . mysqli_error($conn);
             }
@@ -45,7 +45,7 @@
             
             if($p_amount > 0 ){
                 // Insert Seller_Payment
-                $sql = "INSERT INTO seller_payment VALUES ('', '$s_phn','$p_amount', CURRENT_TIMESTAMP )";
+                $sql = "INSERT INTO seller_payment VALUES (DEFAULT, '$s_phn','$p_amount', CURRENT_TIMESTAMP )";
                 if (!mysqli_query($conn, $sql)) {
                     echo "Error: " . $sql . "<br>" . mysqli_error($conn);
                 }
@@ -103,7 +103,7 @@
                 // if seller is already added
 
                 // Add Product
-                $sql = "INSERT INTO products VALUES ('', '$s_phn','$pname', '$price' )";
+                $sql = "INSERT INTO products VALUES (DEFAULT, '$s_phn','$pname', '$price' )";
                 if (!mysqli_query($conn, $sql)) {
                     echo "Error: " . $sql . "<br>" . mysqli_error($conn);
                 }
@@ -116,13 +116,13 @@
 
 
                 // Add Stock
-                $sql = "INSERT INTO stock VALUES ('', '$pid','$qnt', '$pkt' )";
+                $sql = "INSERT INTO stock VALUES (DEFAULT, '$pid','$qnt', '$pkt' )";
                 if (!mysqli_query($conn, $sql)) {
                     echo "Error: " . $sql . "<br>" . mysqli_error($conn);
                 }
 
                 // Add Purchase
-                $sql = "INSERT INTO purchase VALUES ('', '$pid','$qnt', '$pkt','$price', CURRENT_TIMESTAMP )";
+                $sql = "INSERT INTO purchase VALUES (DEFAULT, '$pid','$qnt', '$pkt','$price', CURRENT_TIMESTAMP )";
                 if (!mysqli_query($conn, $sql)) {
                     echo "Error: " . $sql . "<br>" . mysqli_error($conn);
                 }
@@ -130,7 +130,7 @@
                 
                 if($p_amount > 0 ){
                     // Insert Seller Payment
-                    $sql = "INSERT INTO seller_payment VALUES ('', '$s_phn','$p_amount', CURRENT_TIMESTAMP )";
+                    $sql = "INSERT INTO seller_payment VALUES (DEFAULT, '$s_phn','$p_amount', CURRENT_TIMESTAMP )";
                     if (!mysqli_query($conn, $sql)) {
                         echo "Error: " . $sql . "<br>" . mysqli_error($conn);
                     }

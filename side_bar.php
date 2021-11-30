@@ -27,7 +27,7 @@
 						class="menu-item menu-item-type-post_type menu-item-object-page menu-item-163"><a class= "<?php echo($currentPage == "stock" ? 'selectedMenu' : '');  ?>" href="/business_management/stock/stock.php">Stock</a>
 					</li>
 					<li id="menu-item-160"
-						class="menu-item menu-item-type-post_type menu-item-object-page menu-item-160"><a class= "<?php echo($currentPage == "profit" ? 'selectedMenu' : '');  ?>" href="/business_management/Profit/profitInput.php">Profit</a>
+						class="menu-item menu-item-type-post_type menu-item-object-page menu-item-160"><a class= "<?php echo($currentPage == "profit" ? 'selectedMenu' : '');  ?>" href="/business_management/profit/profitInput.php">Profit</a>
 					</li>
 					<li>
 						<a class="nav-link dropdown-toggle <?php echo($currentPage == "payment" ? 'selectedMenu' : '');  ?>"  onclick="payments()" href="#">
