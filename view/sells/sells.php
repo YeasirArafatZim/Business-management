@@ -33,7 +33,6 @@
 	<link rel='stylesheet' id='doro-scrollbar-css' href='../../css/scrollbar76f3.css?ver=5.7.3' type='text/css' media='all' />
 	<script type='text/javascript' src='../../js/jquery.min9d52.js?ver=3.5.1' id='jquery-core-js'></script>
 
-
 	<!-- Style  -->
 	<link rel="stylesheet" href="../../css/style.css">
 
@@ -162,19 +161,20 @@
 									<th class="text-center" scope="col">Packet</th>
 									<th class="text-center" scope="col">Due</th>
 									<th class="text-center" scope="col">tPrice</th>
+									<th class="text-center" scope="col">Action</th>
 								</tr>
 							</thead>
 							<tbody>
 								
 								<?php  
-									$sql = "SELECT products.name as pname, cid, customers.name as cname, sell.date as date, sell.quantity as qnt, sell.packet as pkt, sell.price as price, sell.due as due  FROM sell INNER JOIN products ON sell.pid=products.id INNER JOIN customers ON customers.phn_no = sell.cid where sell.date between '$sDate' and '$enDate' order by sell.date desc";
+									$sql = "SELECT products.name as pname, cid, customers.name as cname, sell.date as date, sell.quantity as qnt, sell.packet as pkt, sell.price as price, sell.due as due, sell.id as sell_id  FROM sell INNER JOIN products ON sell.pid=products.id INNER JOIN customers ON customers.phn_no = sell.cid where sell.date between '$sDate' and '$enDate' order by sell.date desc";
 									$result = mysqli_query($conn, $sql);
 									$i = 1;
 
 									if ($result && mysqli_num_rows($result) > 0) {
 										// output data of each row
 										while($row = mysqli_fetch_assoc($result)) {
-											
+											$sell_id = $row["sell_id"];
 											$pname = $row["pname"];
 											$cname = $row["cname"];
 											$c_phn = $row["cid"];
@@ -203,7 +203,29 @@
 									<td class="text-center" style="color: black;"><?php echo $pkt  ?></td>
 									<td class="text-center" style="font-weight: bold; color: red;"><?php echo $due  ?><sub style="color:gray;">ট</sub></td>
 									<td class="text-center" style="font-weight: bold; color: green;"><?php echo $price  ?><sub style="color:gray;">ট</sub></td>
+									<td class="text-center" > <button data-bs-toggle="modal" data-bs-target="#exampleModal<?php echo $sell_id;?>" style="margin: 0px; padding: 0px; background-color:white; cursor:pointer"><i class="fas fa-trash-alt fa-lg" style="color:red; background-color:white"></i></button> </td>
 								</tr>
+
+								<!-- Modal -->
+									<div class="modal fade" id="exampleModal<?php echo $sell_id;?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+										<div class="modal-dialog modal-dialog-centered">
+											<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title" id="exampleModalLabel" style="font-weight:bold">Delete Sell</h5>
+												<button type="button" style="background-color:white; color:black; cursor:pointer; margin:0px; padding: 0px " data-bs-dismiss="modal" aria-label="Close"><i class="fas fa-times fa-lg"></i></button>
+											</div>
+											<div class="modal-body" style="padding:0px; padding-top:18px">
+												<h6 style="text-align:center; font-weight:bold; color:#cc0000">Are you sure you want to delete this sell?</h6>
+											</div>
+											<div class="modal-footer">
+												<!-- <button type="button" style="background-color:gray" class="btn" data-bs-dismiss="modal">Close</button> -->
+												<a class="btn" href="#" data-bs-dismiss="modal" style="background-color:gray">Close</a>
+												<a href="delete.php?sell_id=<?php echo $sell_id;?>" class="btn" style="background-color:#ff1a1a">Delete</a>
+											</div>
+											</div>
+										</div>
+									</div>
+								<!-- Modal End  -->
 
 								<?php     }}      ?>
 								
@@ -267,5 +289,15 @@
 		
     </script>
 
+	<!-- Bootstrap for Modal  -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
+
 </body>
 </html>
+
+<?php 
+	function delete($sell_id){
+		echo $sell_id;
+	}
+
+?>
