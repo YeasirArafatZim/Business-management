@@ -10,6 +10,7 @@
         $pkt = $_SESSION["pkt"];
         $s_phn = $_SESSION["s_phn"];
         $p_amount = $_SESSION["amount"];
+        $cDue = $qnt*$price - $p_amount;
 
 
         $sql = "SELECT * FROM products WHERE name = '$pname' and price = '$price' and sid = '$s_phn'";
@@ -21,9 +22,11 @@
             $pid = $row["id"];
 
             // Add Purchase
-            $sql = "INSERT INTO purchase VALUES (DEFAULT, '$pid','$qnt', '$pkt','$price', CURRENT_TIMESTAMP )";
+            $sql = "INSERT INTO purchase VALUES (DEFAULT, '$pid','$qnt', '$pkt','$price', CURRENT_TIMESTAMP, '$cDue' )";
             if (!mysqli_query($conn, $sql)) {
                 echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+            }else{
+                $pur_id = mysqli_insert_id($conn);
             }
 
             // Update Stock
@@ -45,7 +48,7 @@
             
             if($p_amount > 0 ){
                 // Insert Seller_Payment
-                $sql = "INSERT INTO seller_payment VALUES (DEFAULT, '$s_phn','$p_amount', CURRENT_TIMESTAMP )";
+                $sql = "INSERT INTO seller_payment VALUES (DEFAULT, '$s_phn','$p_amount', CURRENT_TIMESTAMP, '$pur_id' )";
                 if (!mysqli_query($conn, $sql)) {
                     echo "Error: " . $sql . "<br>" . mysqli_error($conn);
                 }
@@ -122,15 +125,17 @@
                 }
 
                 // Add Purchase
-                $sql = "INSERT INTO purchase VALUES (DEFAULT, '$pid','$qnt', '$pkt','$price', CURRENT_TIMESTAMP )";
+                $sql = "INSERT INTO purchase VALUES (DEFAULT, '$pid','$qnt', '$pkt','$price', CURRENT_TIMESTAMP, '$cDue' )";
                 if (!mysqli_query($conn, $sql)) {
                     echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+                }else{
+                    $pur_id = mysqli_insert_id($conn);
                 }
 
                 
                 if($p_amount > 0 ){
                     // Insert Seller Payment
-                    $sql = "INSERT INTO seller_payment VALUES (DEFAULT, '$s_phn','$p_amount', CURRENT_TIMESTAMP )";
+                    $sql = "INSERT INTO seller_payment VALUES (DEFAULT, '$s_phn','$p_amount', CURRENT_TIMESTAMP, '$pur_id' )";
                     if (!mysqli_query($conn, $sql)) {
                         echo "Error: " . $sql . "<br>" . mysqli_error($conn);
                     }

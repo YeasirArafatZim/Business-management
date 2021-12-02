@@ -12,6 +12,7 @@
         $p_amount = $_SESSION["amount"];
         $s_name = $_SESSION["s_name"];
         $address = $_SESSION["address"];
+        $cDue = $qnt*$price - $p_amount;
 
         // Add seller
         $sql = "INSERT INTO sellers VALUES ('$s_phn', '$s_name','$address', '0' ,'0', '0' )";
@@ -39,15 +40,17 @@
         }
 
         // Add Purchase
-        $sql = "INSERT INTO purchase VALUES (DEFAULT, '$pid','$qnt', '$pkt','$price', CURRENT_TIMESTAMP )";
+        $sql = "INSERT INTO purchase VALUES (DEFAULT, '$pid','$qnt', '$pkt','$price', CURRENT_TIMESTAMP, '$cDue' )";
         if (!mysqli_query($conn, $sql)) {
             echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+        }else{
+            $pur_id = mysqli_insert_id($conn);
         }
 
         
         if($p_amount > 0 ){
             // Insert Seller Payment
-            $sql = "INSERT INTO seller_payment VALUES (DEFAULT, '$s_phn','$p_amount', CURRENT_TIMESTAMP )";
+            $sql = "INSERT INTO seller_payment VALUES (DEFAULT, '$s_phn','$p_amount', CURRENT_TIMESTAMP, '$pur_id' )";
             if (!mysqli_query($conn, $sql)) {
                 echo "Error: " . $sql . "<br>" . mysqli_error($conn);
             }

@@ -7,7 +7,9 @@
 		
 		$s_phn = $_POST["s_phn"];
 		$p_amount = $_POST["paid_amount"];
+        $purchaseId = $_POST["productName"];
 
+        $_SESSION['purchase_id'] = $purchaseId;
         $_SESSION['s_phn'] = $s_phn;
         $_SESSION['p_amount'] = $p_amount;
 
