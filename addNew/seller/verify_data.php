@@ -4,22 +4,20 @@
     $currentPage = "payment";
     $result = "";
 	if(isset($_POST["submit"])){
-		
-		$s_phn = $_POST["s_phn"];
-        $_SESSION['s_phn'] = $s_phn;
-
-        if(isset($_POST["productName"])){
-            $purchaseId = $_POST["productName"];
-            $_SESSION['purchase_id'] = $purchaseId;
+		$phn = $_POST["c_phn"];
+        $_SESSION['phn'] = $phn;
+        if(isset($_POST["c_name"])){
+            $name = $_POST["c_name"];
+            $_SESSION['name'] = $name;
         }
-        
-        if(isset($_POST["paid_amount"])){
-            $p_amount = $_POST["paid_amount"];
-            $_SESSION['p_amount'] = $p_amount;
+		if(isset($_POST["address"])){
+            $add = $_POST["address"];
+            $_SESSION['add'] = $add;
         }
-
-        $sql = "SELECT * FROM sellers WHERE phn_no = '$s_phn'";
-        $result = mysqli_query($conn, $sql);
+        if(isset($_POST["due"])){
+            $due = $_POST["due"];
+        $_SESSION['due'] = $due;
+        }
 		
 	}
 ?>
@@ -33,7 +31,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 	<meta name="robots" content="index, follow" />
-	<title>মুণি ট্রেডার্স &#8211; Payments </title>
+	<title>মুণি ট্রেডার্স &#8211; Verify </title>
 
 
 	<!-- SideBar Links -->
@@ -69,7 +67,7 @@
 			<div class="banner-top">
 				<div class="row">
 					<div class="col-md-3 col-sm-4 col-6 mg">
-						<h3 class="banner-top-text text-light">Seller's Payment</h3>
+						<h3 class="banner-top-text text-light">New Seller</h3>
 					</div>
 					<div class="col-md-6 col-sm-7 col-6  only-icon">
                         <button onclick="logout()" class="btn"><i class="fas fa-sign-out-alt"></i></button>
@@ -91,21 +89,17 @@
                 </div>
 
                 <div class="box mt-3 px-5 py-3">
-                    <?php if(mysqli_num_rows($result) > 0){
-                        $row = mysqli_fetch_assoc($result);
-                        $s_name = $row["name"];
-                        $address = $row["address"];
-                        
+                    <?php   
+                        if(isset($_POST["c_name"])){
                     ?>
-                        
                     <div class="row">
                         <div class="col-md-6 col-sm-6 col-6 position-static">
-                            <p class="verify_label">Cutomer's Mobile No: </p>
+                            <p class="verify_label">Seller's Mobile No: </p>
                         </div>
                         <div class="col-md-6 col-sm-6 col-6 position-static">
-                            <p class="verify_data"><?php $phn = substr($s_phn,5);
-                                        $phn = str_split($s_phn, $split_length = 5);
-                                        echo $phn[0]."-".$phn[1].$phn[2];?></p>
+                            <p class="verify_data"><?php $c_phn = substr($phn,5);
+                                        $c_phn = str_split($phn, $split_length = 5);
+                                        echo $c_phn[0]."-".$c_phn[1].$c_phn[2];?></p>
                         </div>
                     </div>
 					<div class="row">
@@ -113,7 +107,7 @@
                             <p class="verify_label">Seller's Name: </p>
                         </div>
                         <div class="col-md-6 col-sm-6 col-6 position-static">
-                            <p class="verify_data"><?php echo $s_name?></p>
+                            <p class="verify_data"><?php echo $name;?></p>
                         </div>
                     </div>
 					<div class="row">
@@ -121,42 +115,43 @@
                             <p class="verify_label">Seller's Address: </p>
                         </div>
                         <div class="col-md-6 col-sm-6 col-6 position-static">
-                            <p class="verify_data"><?php echo $address?></p>
+                            <p class="verify_data"><?php echo $add;?></p>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-md-6 col-sm-6 col-6 position-static">
-                            <p class="verify_label">Paid amount: </p>
+                            <p class="verify_label">Due amount: </p>
                         </div>
                         <div class="col-md-6 col-sm-6 col-6 position-static">
-                            <p class="verify_data"><?php echo $p_amount?></p>
+                            <p class="verify_data"><?php echo $due;?></p>
                         </div>
                     </div>
-                    <?php }else{ ?>
-
-                        <h4 class="mx-auto text-center">You don't make any purchase from this Seller. Please check Mobile no.</h4>
-
+                    
+                    <?php
+                        }else{
+                    
+                    ?>
+                    
+                    <p class="text-center mb-2 mt-2" style="font-size:20px; color: red">This seller is already added</p>
+                    
                     <?php } ?>
-                
                 </div>
 
-                <?php if(mysqli_num_rows($result) > 0){    ?>
-
-                    <div class="box verify_top px-5 pb-0 mt-3 mx-5" style="background-color: #FFD9D9;">
-                        <p class="verify_head">You cannot make changes after submitting the form.</p>
-                    </div>
+                <?php   
+                    if(isset($_POST["c_name"])){
+                ?>
+                <div class="box verify_top px-5 pb-0 mt-3 mx-5" style="background-color: #FFD9D9;">
+                    <p class="verify_head">You cannot make changes after submitting the form.</p>
+                </div>
                 <?php } ?>
 
                 <div style="text-align:center">
                     <form action="insert_data.php" method="post">
-
-                            <input style="margin-right:30px" class="btn_close" type="submit" value="Close" name="close">
-                            <?php if(mysqli_num_rows($result) > 0){    ?>
-                                <input type="submit" value="Submit" name="submit">
-                            <?php } ?>
-                        
-                        
+                        <input style="margin-right:30px" class="btn_close" type="submit" value="Close" name="close">
+                        <?php  if(isset($_POST["c_name"])){ ?>
+                            <input type="submit" value="Submit" name="submit"> 
+                        <?php } ?> 
                     </form>
                 </div>
                 

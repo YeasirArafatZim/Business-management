@@ -10,9 +10,10 @@ $phn = $_GET['p'];
 require_once("../../uservelidation.php");
 require_once("../../connect_db.php");
 
-$sql="SELECT purchase.id as id, purchase.due as due, purchase.date as date , products.name as name from purchase inner join products on purchase.pid=products.id where products.sid = '$phn' order by purchase.due desc ";
-$result = mysqli_query($conn,$sql);
-if (mysqli_num_rows($result) > 0) {
+
+    $sql="SELECT phn_no from sellers where phn_no = '$phn'";
+    $result = mysqli_query($conn,$sql);
+    if (mysqli_num_rows($result) > 0) {
 ?>
 <div class="row mt-3 mx-2">
     <div class="col-md-12 position-static">
@@ -21,6 +22,9 @@ if (mysqli_num_rows($result) > 0) {
         <select style="widht:100%;" name="productName" id="productName" required>
             <option value="" disabled selected>--Select a Purchase--</option>
                     <?php
+                        $sql="SELECT purchase.id as id, purchase.due as due, purchase.date as date , products.name as name from purchase inner join products on purchase.pid=products.id where products.sid = '$phn' order by purchase.due desc ";
+                        $result = mysqli_query($conn,$sql);
+                        if (mysqli_num_rows($result) > 0) {
                         
                             // output data of each row
                             while($row = mysqli_fetch_assoc($result)){
@@ -29,7 +33,14 @@ if (mysqli_num_rows($result) > 0) {
                                     $date = date("j M,Y  h:i A", $date);
                                 ?>
                                     <option value= <?php echo $row["id"] ?>> <?php echo $row["due"]; ?>tk &nbsp;&nbsp;&nbsp;  (<?php echo $date; ?>) &nbsp;&nbsp;&nbsp;(<?php echo $row["name"];?> ) </option>
-                    <?php  }} ?>
+                        <?php  }}}
+                        $sql = "select * from seller_previous_due where sid = '$phn'";
+                        $result = mysqli_query($conn, $sql);
+                        $row = mysqli_fetch_assoc($result);
+                        if($row["due"] > 0){
+                    ?>
+                    <option value= "-10"> Previous Due Payment &nbsp;&nbsp;&nbsp; ( <?php echo $row["due"]; ?>tk )</option>
+                    <?php } ?>
         </select>
     </div>
 </div>
@@ -43,7 +54,7 @@ if (mysqli_num_rows($result) > 0) {
 
 
 <?php
-}
+    }
 mysqli_close($conn);
 ?>
 </body>

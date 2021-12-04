@@ -31,8 +31,14 @@ if (mysqli_num_rows($result) > 0) {
                                     $date = date("j M,Y  h:i A", $date);
                                 ?>
                                     <option value= <?php echo $row["id"] ?>> <?php echo $row["due"]; ?>tk &nbsp;&nbsp;&nbsp;  (<?php echo $date; ?>) &nbsp;&nbsp;&nbsp;(<?php echo $row["name"];?> ) </option>
-                    <?php  }}} ?>
-                    <option value= "-10"> Previous Due Payment</option>
+                    <?php  }}}
+                        $sql = "select * from customer_previous_due where cid = '$phn'";
+                        $result = mysqli_query($conn, $sql);
+                        $row = mysqli_fetch_assoc($result);
+                        if($row["due"] > 0){
+                    ?>
+                    <option value= "-10"> Previous Due Payment &nbsp;&nbsp;&nbsp; ( <?php echo $row["due"]; ?>tk )</option>
+                    <?php } ?>
         </select>
     </div>
 </div>

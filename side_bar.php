@@ -51,7 +51,7 @@
 						</a>
 						<ul class="dropdown-content" id="myDropdown" style="background-color:black;width:100%; overflow:hidden">
 							<li><a class="dropdown-item" style="margin:0px; height:40px;padding-top:10px" href="/business_management/addNew/customer/newCustomer.php"><p style="text-align:center">Customer</p></a></li>
-							<li><a class="dropdown-item" style="margin:0px; height:40px;padding-top:10px;" href=""><p style="text-align:center">Seller</p></a></li>
+							<li><a class="dropdown-item" style="margin:0px; height:40px;padding-top:10px;" href="/business_management/addNew/seller/newSeller.php"><p style="text-align:center">Seller</p></a></li>
 							
 						</ul>
 					</li>

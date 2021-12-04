@@ -8,28 +8,50 @@
         $p_amount = $_SESSION["p_amount"];
         $purchaseId = $_SESSION['purchase_id'];
         
-        if($p_amount > 0 ){
+        if($p_amount > 0 && $purchaseId >= '0'){
             // Insert Seller Payment
             $sql = "INSERT INTO seller_payment VALUES (DEFAULT, '$s_phn','$p_amount', CURRENT_TIMESTAMP, '$purchaseId' )";
             if (!mysqli_query($conn, $sql)) {
                 echo "Error: " . $sql . "<br>" . mysqli_error($conn);
             }
+
+            // Update Purchase
+            $sql = "select due from purchase where id = '$purchaseId'";
+            $result = mysqli_query($conn, $sql);
+            $row = mysqli_fetch_assoc($result);
+            $c_due = $row['due'];
+            $n_due = $row['due']-$p_amount;
+
+            $sql = "UPDATE purchase SET due = '$n_due' WHERE id = '$purchaseId'";
+            if (!mysqli_query($conn, $sql)) {
+                echo "Error updating purchase: " . mysqli_error($conn);
+            }
         }
 
-        // Update Purchase
-        $sql = "select due from purchase where id = '$purchaseId'";
-        $result = mysqli_query($conn, $sql);
-        $row = mysqli_fetch_assoc($result);
-        $c_due = $row['due'];
-        $n_due = $row['due']-$p_amount;
+        if($p_amount > 0 && $purchaseId == '-10'){
 
-        $sql = "UPDATE purchase SET due = '$n_due' WHERE id = '$purchaseId'";
-        if (!mysqli_query($conn, $sql)) {
-            echo "Error updating purchase: " . mysqli_error($conn);
+            // Update Seller previous due
+            $sql = "select * from seller_previous_due where sid = '$s_phn'";
+            $result = mysqli_query($conn, $sql);
+            $row = mysqli_fetch_assoc($result);
+            $pDue = $row["due"];
+            $nDue = $pDue - $p_amount;
+
+            $sql = "UPDATE seller_previous_due SET due = '$nDue' WHERE sid = '$s_phn'";
+            if (!mysqli_query($conn, $sql)) {
+                echo "Error updating seller_previous_due record: " . mysqli_error($conn);
+            }
+
+            // Insert Seller Payment
+            $sql = "INSERT INTO seller_payment VALUES (DEFAULT, '$s_phn','$p_amount', CURRENT_TIMESTAMP, '$purchaseId' )";
+            if (!mysqli_query($conn, $sql)) {
+                echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+            }
+
         }
         
 
-        // Update Customer
+        // Update Seller
         $sql = "SELECT paid, due FROM sellers WHERE phn_no = '$s_phn'";
         $result = mysqli_query($conn, $sql);
         $row = mysqli_fetch_assoc($result);
@@ -43,7 +65,7 @@
         $sql = "UPDATE sellers SET paid = '$new_paid', due = '$new_due' WHERE phn_no = '$s_phn'";
         if (!mysqli_query($conn, $sql)) {
             echo "Error updating record: " . mysqli_error($conn);
-            echo $_SESSION["msg"] = '<script">
+            $_SESSION["msg"] = '<script">
                                         window.setTimeout(function(){
                                             alert("Payment not successfully added.");
                                         }, 500); 

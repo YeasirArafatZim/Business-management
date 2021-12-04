@@ -85,7 +85,7 @@
                                 <th style="text-align:center" scope="col">Name</th>
                                 <th style="text-align:center" scope="col">Mobile No</th>
                                 <th style="text-align:center" scope="col">Address</th>
-                                <th style="text-align:center" scope="col">Due</th>
+                                <th style="text-align:center" scope="col">Have to pay</th>
                             </tr>
                         </thead>
                         <tbody>

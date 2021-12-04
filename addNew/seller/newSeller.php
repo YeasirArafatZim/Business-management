@@ -13,7 +13,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 	<meta name="robots" content="index, follow" />
-	<title>মুণি ট্রেডার্স &#8211; New Customer </title>
+	<title>মুণি ট্রেডার্স &#8211; New Seller </title>
 
 
 	<!-- SideBar Links -->
@@ -66,7 +66,7 @@
 			<div class="banner-top">
 				<div class="row">
 					<div class="col-md-3 col-sm-4 col-6 mg">
-						<h3 class="banner-top-text text-light">Add Customer</h3>
+						<h3 class="banner-top-text text-light">Add Seller</h3>
 					</div>
 					<div class="col-md-6 col-sm-7 col-6  only-icon">
 						<button onclick="logout()" class="btn"><i class="fas fa-sign-out-alt"></i></button>
@@ -84,7 +84,7 @@
 			<div class="container" style="padding-top: 80px">
 
                 <div style="text-align:center; font-weight:bold">
-                    <h3 style="font-weight:bold">Add New Customer</h3>
+                    <h3 style="font-weight:bold">Add New Seller</h3>
                 </div>
 
                 <form action="verify_data.php" method="post">
@@ -93,7 +93,7 @@
 
                         <div class="row mt-3 mx-2">
                             <div class="col-md-12 position-static">
-								<label for="c_phn">Customer's Mobile No</label><br>
+								<label for="c_phn">Seller's Mobile No</label><br>
                             	<input type="tel" pattern="[0]{1}[1]{1}[0-9]{9}" onchange="showOption(this.value)" placeholder="format: 01758123578" id="c_phn" name="c_phn" required><br>
                             </div>
                         </div>

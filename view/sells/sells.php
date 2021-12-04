@@ -295,9 +295,3 @@
 </body>
 </html>
 
-<?php 
-	function delete($sell_id){
-		echo $sell_id;
-	}
-
-?>

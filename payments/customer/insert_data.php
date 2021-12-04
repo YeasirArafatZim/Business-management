@@ -30,6 +30,19 @@
 
 
         if($c_amount > 0 && $sell_id == '-10'){
+
+            // Update Customer previous due
+            $sql = "select * from customer_previous_due where cid = '$c_phn'";
+            $result = mysqli_query($conn, $sql);
+            $row = mysqli_fetch_assoc($result);
+            $pDue = $row["due"];
+            $nDue = $pDue - $c_amount;
+
+            $sql = "UPDATE customer_previous_due SET due = '$nDue' WHERE cid = '$c_phn'";
+            if (!mysqli_query($conn, $sql)) {
+                echo "Error updating Customer_previous_due record: " . mysqli_error($conn);
+            }
+
             // Insert Customer Payment
             $sql = "INSERT INTO customer_payment VALUES (DEFAULT, '$c_phn','$c_amount', CURRENT_TIMESTAMP, '$sell_id' )";
             if (!mysqli_query($conn, $sql)) {
