@@ -15,8 +15,10 @@
     overflow: hidden;
 }
 .selectedMenu{
-    color:white !important;
+    color:red !important;
     font-weight: bold !important;
+    margin-left: 10px !important;
+    font-size: 17px !important; 
 }
 #doro-aside #doro-main-menu > ul > li > a:hover{
     font-weight: bold !important;

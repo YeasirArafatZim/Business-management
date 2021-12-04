@@ -1,10 +1,14 @@
+<!-- fonts  -->
+<link href="https://fonts.maateen.me/charukola-ultra-light/font.css" rel="stylesheet">
+
 <!-- Sidebar Section -->
 <aside id="doro-aside">
 			<!-- Logo -->
-			<h1 id="doro-logo" style="font-weight:550">
-				<a class="logo-holder text-logo" href="#">
+			<h1 id="doro-logo">
+				<a class="logo-holder text-logo" style="margin-top:-25px;text-shadow: 3px 3px 5px #B8860B; color: #FFFF00; font-family: 'CharukolaUltraLight', sans-serif; font-weight:bolder;" href="#">
+
 					মুণি ট্রেডার্স
-					<span>Innovative Agency</span>
+					<span style="margin-top: 12px; color: #5DADE2;text-shadow: 3px 3px 5px #008B8B;">Innovative Agency</span>
 
 				</a>
 			</h1>
@@ -14,6 +18,7 @@
 			<nav id="doro-main-menu">
 				<ul>
 					<li id="menu-item-162"
+						style="margin-top: -15px"
 						class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-158 current_page_item menu-item-162">
 						<a href="/business_management/home/" class= "<?php echo($currentPage == "home" ? 'selectedMenu' : '');  ?>" aria-current="page">Dashboard</a>
 					</li>
@@ -30,12 +35,23 @@
 						class="menu-item menu-item-type-post_type menu-item-object-page menu-item-160"><a class= "<?php echo($currentPage == "profit" ? 'selectedMenu' : '');  ?>" href="/business_management/profit/profitInput.php">Profit</a>
 					</li>
 					<li>
-						<a class="nav-link dropdown-toggle <?php echo($currentPage == "payment" ? 'selectedMenu' : '');  ?>"  onclick="payments()" href="#">
+						<a class="nav-link dropdown-toggle <?php echo($currentPage == "payment" ? 'selectedMenu' : '');  ?>"  onclick="addNew()" href="#">
 							Payments
 						</a>
-						<ul class="dropdown-content" id="myDropdown" style="background-color:black;width:100%; overflow:hidden">
+						<ul class="dropdown-content" id="myDropdown3" style="background-color:black;width:100%; overflow:hidden">
 							<li><a class="dropdown-item" style="margin:0px; height:40px;padding-top:10px" href="/business_management/payments/customer/customerPayment.php"><p style="text-align:center">Customer's</p></a></li>
 							<li><a class="dropdown-item" style="margin:0px; height:40px;padding-top:10px;" href="/business_management/payments/seller/sellerPayment.php"><p style="text-align:center">Seller's</p></a></li>
+							
+						</ul>
+					</li>
+
+					<li>
+						<a class="nav-link dropdown-toggle <?php echo($currentPage == "addnew" ? 'selectedMenu' : '');  ?>"  onclick="payments()" href="#">
+							Add New
+						</a>
+						<ul class="dropdown-content" id="myDropdown" style="background-color:black;width:100%; overflow:hidden">
+							<li><a class="dropdown-item" style="margin:0px; height:40px;padding-top:10px" href="/business_management/addNew/customer/newCustomer.php"><p style="text-align:center">Customer</p></a></li>
+							<li><a class="dropdown-item" style="margin:0px; height:40px;padding-top:10px;" href=""><p style="text-align:center">Seller</p></a></li>
 							
 						</ul>
 					</li>
@@ -69,7 +85,7 @@
 
 
 			<!-- Sidebar Footer -->
-			<div class="doro-footer mt-5" style="position: relative; padding: 0px, margin-top: 30px">
+			<div class="doro-footer mt-3" style="position: relative; padding: 0px, margin-top: 30px">
 				<p><small>
 					<p>© মুণি ট্রেডার্স 2021 | All rights reserved.</p>
 				</small></p>
@@ -106,6 +122,14 @@
 					document.getElementById("myDropdown1").style.display = "none";
 				}else{
 					document.getElementById("myDropdown1").style.display = "block";
+				}
+			}
+			function addNew() {
+				let temp = document.getElementById("myDropdown3");
+				if(temp.style.display === 'block'){
+					document.getElementById("myDropdown3").style.display = "none";
+				}else{
+					document.getElementById("myDropdown3").style.display = "block";
 				}
 			}
 			

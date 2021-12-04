@@ -9,9 +9,9 @@
         $sell_id = $_SESSION['sell_id'];
         
         
-        if($c_amount > 0 ){
+        if($c_amount > 0 && $sell_id >= '0'){
             // Insert Customer Payment
-            $sql = "INSERT INTO customer_payment VALUES (DEFAULT, '$c_phn','$c_amount', CURRENT_TIMESTAMP )";
+            $sql = "INSERT INTO customer_payment VALUES (DEFAULT, '$c_phn','$c_amount', CURRENT_TIMESTAMP, '$sell_id' )";
             if (!mysqli_query($conn, $sql)) {
                 echo "Error: " . $sql . "<br>" . mysqli_error($conn);
             }
@@ -26,8 +26,19 @@
             if (!mysqli_query($conn, $sql)) {
                 echo "Error updating due in sell table: " . mysqli_error($conn);
             }
+        }
+
+
+        if($c_amount > 0 && $sell_id == '-10'){
+            // Insert Customer Payment
+            $sql = "INSERT INTO customer_payment VALUES (DEFAULT, '$c_phn','$c_amount', CURRENT_TIMESTAMP, '$sell_id' )";
+            if (!mysqli_query($conn, $sql)) {
+                echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+            }
 
         }
+
+        
 
         // Update Customer
         $sql = "SELECT cost,paid, due FROM customers WHERE phn_no = '$c_phn'";
@@ -48,7 +59,7 @@
         $sql = "UPDATE customers SET paid = '$new_paid', due = '$new_due' WHERE phn_no = '$c_phn'";
         if (!mysqli_query($conn, $sql)) {
             echo "Error updating record: " . mysqli_error($conn);
-            echo $_SESSION["msg"] = '<script">
+            $_SESSION["msg"] = '<script">
                                         window.setTimeout(function(){
                                             alert("Payment not successfully added.");
                                         }, 500); 
