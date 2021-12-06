@@ -67,9 +67,19 @@ if (mysqli_query($conn, $sql)) {
 $sql = "DELETE FROM sell WHERE id='$sell_id'";
 if (mysqli_query($conn, $sql)) {
     echo "Sell deleted successfully";
+    $_SESSION["msg"] = '<script>
+                                        window.setTimeout(function(){
+                                            alert("Successfully Sell Deleted");
+                                        }, 500); 
+                                     </script>';
   } else {
     echo "Error deleting Sell record: " . mysqli_error($conn);
+    $_SESSION["msg"] = '<script>
+                                        window.setTimeout(function(){
+                                            alert("Sell not Deleted");
+                                        }, 500); 
+                                     </script>';
 }
-
+header('location: inputDate.php');
 
 ?>

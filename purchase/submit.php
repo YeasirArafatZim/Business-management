@@ -9,8 +9,9 @@
 		$pkt = $_POST["ppkt"];
 		$s_phn = $_POST["s_phn"];
         $p_amount = $_POST["paid_amount"];
+        $cost = $_POST["cost"];
 
-
+        $_SESSION['cost'] = $cost;
         $_SESSION["pname"] = $pname;
         $_SESSION["pprice"] = $price;
         $_SESSION["qnt"] = $qnt;

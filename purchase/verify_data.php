@@ -8,6 +8,7 @@
     $pkt = $_SESSION["pkt"];
     $s_phn = $_SESSION["s_phn"];
     $p_amount = $_SESSION["amount"];
+    $cost = $_SESSION['cost'];
 
     $sql = "select name from sellers where phn_no = '$s_phn'";
     $result = mysqli_query($conn, $sql);
@@ -111,6 +112,14 @@
                         </div>
                         <div class="col-md-6 col-sm-6 col-6 position-static">
                             <p class="verify_data"><?php echo $pkt?></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-6 position-static">
+                            <p class="verify_label">Transportation Cost: </p>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-6 position-static">
+                            <p class="verify_data"><?php echo $cost?></p>
                         </div>
                     </div>
                     <div class="row">

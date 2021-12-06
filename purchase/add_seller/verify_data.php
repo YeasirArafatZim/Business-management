@@ -10,6 +10,7 @@
 		$p_amount = $_SESSION["amount"];
 		$s_name = $_POST["s_name"];
 		$address = $_POST["address"];
+        $trans_cost = $_SESSION["cost"];
 
 		$_SESSION["s_name"] = $s_name;
 		$_SESSION["address"]= $address;
@@ -109,10 +110,18 @@
                     </div>
                     <div class="row">
                         <div class="col-md-6 col-sm-6 col-6 position-static">
+                            <p class="verify_label">Transportation Cost: </p>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-6 position-static">
+                            <p class="verify_data"><?php echo $trans_cost;?></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-6 position-static">
                             <p class="verify_label">No of Packet: </p>
                         </div>
                         <div class="col-md-6 col-sm-6 col-6 position-static">
-                            <p class="verify_data"><?php echo $pkt?></p>
+                            <p class="verify_data"><?php echo $pkt;?></p>
                         </div>
                     </div>
                     <div class="row">

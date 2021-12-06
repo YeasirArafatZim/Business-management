@@ -96,14 +96,25 @@
                             	<input type="tel" pattern="[0]{1}[1]{1}[0-9]{9}" placeholder="format: 01758123578" id="s_phn" name="s_phn" required><br>
                             </div>
 
-                            <div class="col-md-6 position-static">
+							<div class="col-md-6 position-static">
+                                <label for="t_amount">Total Amount</label><br>
+                                <input type="number" min="0" step="0.1" placeholder="total amount" id="t_amount" name="t_amount"><br>
+                            </div> 
+						</div>
+
+						<div class="row mt-3 mx-2">
+							<div class="col-md-6 position-static">
+								<label for="cost">Transportation Cost</label><br>
+								<input type="number" min="0" step="0.1" placeholder="transportation cost" id="cost" name="cost" required><br>
+                            </div>
+							<div class="col-md-6 position-static">
                                 <label for="paid_amount">Paid Amount</label><br>
                                 <input type="number" min="0" step="0.1" placeholder="amount paid to the seller" id="paid_amount" name="paid_amount" required><br>
                             </div>
 						</div>
 
 
-                        <br><br>
+                        <br>
                     </div>
 
                     <div style="text-align:center">

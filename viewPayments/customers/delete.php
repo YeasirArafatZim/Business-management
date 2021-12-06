@@ -59,9 +59,19 @@ if (mysqli_query($conn, $sql)) {
 $sql = "DELETE FROM customer_payment WHERE id='$pay_id'";
 if (mysqli_query($conn, $sql)) {
     echo "Customer Payment Record deleted successfully";
+    $_SESSION["msg"] = '<script>
+                                        window.setTimeout(function(){
+                                            alert("Customer\'s Payment Deleted Successful");
+                                        }, 500); 
+                                     </script>';
 } else {
     echo "Error deleting Payment record: " . mysqli_error($conn);
+    $_SESSION["msg"] = '<script>
+                                        window.setTimeout(function(){
+                                            alert("Failed to delete Customer\'s Payment");
+                                        }, 500); 
+                                     </script>';
 }
-
+header('location: inputDate.php');
 
 ?>

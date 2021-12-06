@@ -44,12 +44,12 @@
             background-image: url('../../img/search.png');
             background-position: 10px 10px;
             background-repeat: no-repeat;
+            width: 100%;
             font-size: 16px;
-            padding: 12px 40px 12px 40px;
+            padding: 12px 20px 12px 40px;
             border: 1px solid #ddd;
-            margin-bottom: 25px;
-			width: 50%;
-		}
+            margin-bottom: 12px;
+        }
 		.hide-date{
 			visibility: hidden;
 		}
@@ -120,7 +120,7 @@
 			<!-- Default Page -->
 			<div class="container" style="padding-top: 80px;">
 				<div>
-					<input style="text-align: center;" type="text" id="myInput" onkeyup="mySearchFunction()" placeholder="Search here..">
+					<input type="text" id="myInput" onkeyup="mySearchFunction()" placeholder="Search here..">
 				</div>
 				<div class="px-3 mb-2">
 				<button type="button" onclick="printDiv('print-container')" class="btn" style="background-color: #53C222;">Print</button>

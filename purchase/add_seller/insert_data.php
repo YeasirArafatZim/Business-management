@@ -12,6 +12,9 @@
         $p_amount = $_SESSION["amount"];
         $s_name = $_SESSION["s_name"];
         $address = $_SESSION["address"];
+        $trans_cost = $_SESSION["cost"];
+
+        $nPrice = ($trans_cost/$qnt) + $price;
         $cDue = $qnt*$price - $p_amount;
 
         // Add seller
@@ -21,13 +24,13 @@
         }
 
         // Add Product
-        $sql = "INSERT INTO products VALUES (DEFAULT, '$s_phn','$pname', '$price' )";
+        $sql = "INSERT INTO products VALUES (DEFAULT, '$s_phn','$pname', '$nPrice' )";
         if (!mysqli_query($conn, $sql)) {
             echo "Error: " . $sql . "<br>" . mysqli_error($conn);
         }
 
         // get product id
-        $sql = "SELECT id FROM products WHERE name = '$pname' and price = '$price' and sid = '$s_phn'";
+        $sql = "SELECT id FROM products WHERE name = '$pname' and price = '$nPrice' and sid = '$s_phn'";
         $result = mysqli_query($conn, $sql);
         $row = mysqli_fetch_assoc($result);
         $pid = $row["id"];
@@ -40,7 +43,7 @@
         }
 
         // Add Purchase
-        $sql = "INSERT INTO purchase VALUES (DEFAULT, '$pid','$qnt', '$pkt','$price', CURRENT_TIMESTAMP, '$cDue' )";
+        $sql = "INSERT INTO purchase VALUES (DEFAULT, '$pid','$qnt', '$pkt','$nPrice', CURRENT_TIMESTAMP, '$cDue', '$trans_cost' )";
         if (!mysqli_query($conn, $sql)) {
             echo "Error: " . $sql . "<br>" . mysqli_error($conn);
         }else{
@@ -94,6 +97,7 @@
                 unset($_SESSION['amount']);
                 unset($_SESSION["s_name"]);
                 unset($_SESSION["address"]);
+                unset($_SESSION['cost']);
                 header('location: ../index.php');
 
             }

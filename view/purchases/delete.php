@@ -10,11 +10,16 @@ $result=mysqli_query($conn,$sql);
 if(mysqli_num_rows($result) > 0){
   // You cannot delete this purchase 
   echo "Delete related sell first";
+  $_SESSION["msg"] = '<script>
+                        window.setTimeout(function(){
+                            alert("You Sold products from this Purchase. Deletion failed.");
+                        }, 500); 
+                        </script>';
 }else{
     // You can delete this purchase
 
     // Update Seller
-  $sql = "select purchase.due as due, purchase.quantity as quantity, purchase.price as price, purchase.packet as packet, purchase.pid as pid, products.sid as sid from purchase INNER JOIN products on purchase.pid = products.id where purchase.id = '$pur_id'";
+  $sql = "select purchase.due as due, purchase.quantity as quantity,purchase.trans_cost as trans_cost , purchase.price as price, purchase.packet as packet, purchase.pid as pid, products.sid as sid from purchase INNER JOIN products on purchase.pid = products.id where purchase.id = '$pur_id'";
   $result = mysqli_query($conn, $sql);
   $row = mysqli_fetch_assoc($result);
 
@@ -22,8 +27,11 @@ if(mysqli_num_rows($result) > 0){
   $qnt = $row["quantity"];
   $pkt = $row["packet"];
   $pid = $row["pid"];
+  $trans_cost = $row['trans_cost'];
   $sTotal = $row["quantity"]*$row["price"];
+  $sTotal = $row["quantity"]*($row["price"] - ($trans_cost/$qnt));
   $sid = $row["sid"];
+  
 
   $sql = "select cost, paid, due from sellers where phn_no = '$sid'";
   $result = mysqli_query($conn, $sql);
@@ -68,10 +76,24 @@ if(mysqli_num_rows($result) > 0){
   $sql = "DELETE FROM purchase WHERE id='$pur_id'";
   if (mysqli_query($conn, $sql)) {
       echo "Sell deleted successfully";
+      $_SESSION["msg"] = '<script>
+                                        window.setTimeout(function(){
+                                            alert("Successfully Purchase Deleted");
+                                        }, 500); 
+                                     </script>';
+
+
   } else {
       echo "Error deleting Sell record: " . mysqli_error($conn);
+      $_SESSION["msg"] = '<script>
+                                        window.setTimeout(function(){
+                                            alert("Error deleting Purchase");
+                                        }, 500); 
+                                     </script>';
   }
 }
+
+header('location: inputDate.php');
 
 
 
