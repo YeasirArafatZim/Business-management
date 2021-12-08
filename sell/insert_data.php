@@ -75,9 +75,6 @@
             $new_paid = $paid + $c_amount;
             $new_due = $new_cost - $new_paid;
 
-            // Sending Message
-            require_once("../customerMessage.php");
-            sendCustomerMessage($c_phn, $new_cost, $c_amount, $new_due);
 
             $sql = "UPDATE customers SET cost ='$new_cost', paid = '$new_paid', due = '$new_due' WHERE phn_no = '$c_phn'";
             if (!mysqli_query($conn, $sql)) {

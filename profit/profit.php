@@ -8,7 +8,26 @@
 		$eDate = $_POST["edate"];
 		$temp_date = strtotime("1 day", strtotime($eDate));
 		$enDate = date("Y-m-d", $temp_date);
+
+		$sql = "select sum(amount) as tamount from cost where date between '$sDate' and '$enDate'";
+		$result = mysqli_query($conn, $sql);
+		$row = mysqli_fetch_assoc($result);
+
+		$tcost = $row['tamount'];
+		if($tcost == null){
+			$tcost = 0;
+		}
+
+		$sql = "select sum(due) as tdue from sell where date between '$sDate' and '$enDate'";
+		$result = mysqli_query($conn, $sql);
+		$row = mysqli_fetch_assoc($result);
+
+		$tdue = $row['tdue'];
+		if($tdue == null){
+			$tdue = 0;
+		}
 	}
+
 ?>
 
 <!DOCTYPE html>
@@ -120,10 +139,17 @@
 						<h4 style="font-weight:bold; display: inline">Total Profit: </h4>
 						<h4 id="tProfit" style="font-weight:bold; color:#4BB543; display: inline">0 </h4>
 						<h4 style="font-weight:bold; display: inline">tk</h4>
+						<h4 style="font-weight:bold; display: inline;  margin-left: 140px">Extra Costs: </h4>
+						<h4 id="tProfit" style="font-weight:bold; color:red; display: inline;"><?php echo $tcost; ?> </h4>
+						<h4 style="font-weight:bold; display: inline">tk</h4>
+						<h4 style="font-weight:bold; display: inline;  margin-left: 140px">Due: </h4>
+						<h4 id="tProfit" style="font-weight:bold; color:red; display: inline;"><?php echo $tdue; ?> </h4>
+						<h4 style="font-weight:bold; display: inline">tk</h4>
 						<h6 id="print-date" class="hide-date" style="font-weight:bold; display: inline; float:right;"> <?php if($sDate == $eDate) {$d = date_create($sDate); echo date_format($d, "d-M-y");}else{$e = date_create($eDate); echo date_format($e, "d.M.y");} ?> </h6>
 						<h6 class="hide-date" style="display: inline; float:right;"> <?php  if($sDate != $eDate){echo ' - ';} ?> </h6>
 						<h6 id="print-date" class="hide-date" style="font-weight:bold; display: inline; float:right;"> <?php if($sDate != $eDate) {$s = date_create($sDate); echo date_format($s, "d.M.y");} ?> </h6>
-						<h6 class="hide-date" style="display: inline; float:right;">Date: </h6>						</div>
+						<h6 class="hide-date" style="display: inline; float:right;">Date: </h6>						
+					</div>
 						
 
 					<div class="px-3 table-responsive">

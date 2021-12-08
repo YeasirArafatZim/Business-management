@@ -25,8 +25,14 @@
 					<li id="menu-item-159" 
 						class="menu-item menu-item-type-post_type menu-item-object-page menu-item-159"><a class= "<?php echo($currentPage == "purchase" ? 'selectedMenu' : '');  ?>" href="/business_management/purchase/">Purchase</a>
 					</li>
-					<li id="menu-item-164"
-						class="menu-item menu-item-type-post_type menu-item-object-page menu-item-164"><a class= "<?php echo($currentPage == "sell" ? 'selectedMenu' : '');  ?>" href="/business_management/sell/sell.php">Sell</a>
+					<li>
+						<a class="nav-link dropdown-toggle <?php echo($currentPage == "sell" ? 'selectedMenu' : '');  ?>"  onclick="sell()" href="#">
+							Sell
+						</a>
+						<ul class="dropdown-content" id="myDropdown5" style="background-color:black;width:100%; overflow:hidden">
+							<li><a class="dropdown-item" style="margin:0px; height:40px;padding-top:10px" href="/business_management/sell/sell.php"><p style="text-align:center">New Sell</p></a></li>
+							<li><a class="dropdown-item" style="margin:0px; height:40px;padding-top:10px;" href="/business_management/sendMessage/sendMessage.php"><p style="text-align:center">Send Message</p></a></li>
+						</ul>
 					</li>
 					<li id="menu-item-163"
 						class="menu-item menu-item-type-post_type menu-item-object-page menu-item-163"><a class= "<?php echo($currentPage == "stock" ? 'selectedMenu' : '');  ?>" href="/business_management/stock/stock.php">Stock</a>
@@ -41,6 +47,17 @@
 						<ul class="dropdown-content" id="myDropdown3" style="background-color:black;width:100%; overflow:hidden">
 							<li><a class="dropdown-item" style="margin:0px; height:40px;padding-top:10px" href="/business_management/payments/customer/customerPayment.php"><p style="text-align:center">Customer's</p></a></li>
 							<li><a class="dropdown-item" style="margin:0px; height:40px;padding-top:10px;" href="/business_management/payments/seller/sellerPayment.php"><p style="text-align:center">Seller's</p></a></li>
+							
+						</ul>
+					</li>
+
+					<li>
+						<a class="nav-link dropdown-toggle <?php echo($currentPage == "cost" ? 'selectedMenu' : '');  ?>"  onclick="cost()" href="#">
+							Cost
+						</a>
+						<ul class="dropdown-content" id="myDropdown4" style="background-color:black;width:100%; overflow:hidden">
+							<li><a class="dropdown-item" style="margin:0px; height:40px;padding-top:10px" href="/business_management/cost/add/newCost.php"><p style="text-align:center">Add Cost</p></a></li>
+							<li><a class="dropdown-item" style="margin:0px; height:40px;padding-top:10px;" href="/business_management/cost/view/inputDate.php"><p style="text-align:center">View Cost</p></a></li>
 							
 						</ul>
 					</li>
@@ -130,6 +147,22 @@
 					document.getElementById("myDropdown3").style.display = "none";
 				}else{
 					document.getElementById("myDropdown3").style.display = "block";
+				}
+			}
+			function cost() {
+				let temp = document.getElementById("myDropdown4");
+				if(temp.style.display === 'block'){
+					document.getElementById("myDropdown4").style.display = "none";
+				}else{
+					document.getElementById("myDropdown4").style.display = "block";
+				}
+			}
+			function sell() {
+				let temp = document.getElementById("myDropdown5");
+				if(temp.style.display === 'block'){
+					document.getElementById("myDropdown5").style.display = "none";
+				}else{
+					document.getElementById("myDropdown5").style.display = "block";
 				}
 			}
 			

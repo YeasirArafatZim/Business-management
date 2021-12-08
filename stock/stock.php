@@ -2,6 +2,12 @@
 	require_once("../uservelidation.php");
 	require_once("../connect_db.php");
 	$currentPage = "stock";
+
+    $sql = "SELECT sum(stock.quantity*products.price) as result from stock inner join products on stock.pid=products.id";
+    $result = mysqli_query($conn, $sql);
+    $row = mysqli_fetch_assoc($result);
+    $total = $row['result'];
+
 ?>
 
 <!DOCTYPE html>
@@ -76,6 +82,11 @@
 
 			<!-- Default Page -->
 			<div class="container" style="padding-top: 80px;">
+                <div class="px-3 mb-3 text-center">
+                    <h4 style="font-weight:bold; display: inline">Total Stock: </h4>
+                    <h4 id="tProfit" style="font-weight:bold; color:#4BB543; display: inline"><?php echo $total; ?> </h4>
+                    <h4 style="font-weight:bold; display: inline">tk</h4>
+                </div>
                 <div class="px-3 table-responsive">
                     <input type="text" id="myInput" onkeyup="mySearchFunction()" placeholder="Search for products..">
                     <table id="myTable" class="table table-striped borderless table-bordered">

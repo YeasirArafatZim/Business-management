@@ -74,14 +74,14 @@
 
                             <div class="col-md-6 position-static">
                                 <label for="pprice">Unit Price</label><br>
-                                <input type="number" min="0" step="0.1" placeholder="price /kg" id="price" name="pprice" required autocomplete="off"><br>
+                                <input type="number" min="0" step="0.1" onchange="totalAmout()" placeholder="price /kg" id="price" name="pprice" required autocomplete="off"><br>
                             </div>
                         </div>
 
                         <div class="row mt-3 mx-2">
                             <div class="col-md-6 position-static">
                                 <label for="pqnt">Quantity (kg)</label><br>
-                                <input type="number" step="any" min="0" placeholder="product quantity in kg" id="qnt" name="pqnt" required>
+                                <input type="number" step="any" min="0" onchange="totalAmout()" placeholder="product quantity in kg" id="qnt" name="pqnt" required>
                             </div>
 
                             <div class="col-md-6 position-static">
@@ -98,8 +98,8 @@
 
 							<div class="col-md-6 position-static">
                                 <label for="t_amount">Total Amount</label><br>
-                                <input type="number" min="0" step="0.1" placeholder="total amount" id="t_amount" name="t_amount"><br>
-                            </div> 
+								<input type="text" id="t_amount" name="t_amount" placeholder="total amount" disabled><br>
+							</div> 
 						</div>
 
 						<div class="row mt-3 mx-2">
@@ -142,6 +142,13 @@
 	<script type='text/javascript' src='../js/main5152.js?ver=1.0' id='doro-main-js'></script>
     <script>
         const logout = () => location.replace("../logout.php");
+
+		const totalAmout = () => {
+			let q = document.getElementById('qnt').value;
+			let p = document.getElementById('price').value;
+			document.getElementById('t_amount').value = p*q;
+		}
+		
     </script>
 
 	

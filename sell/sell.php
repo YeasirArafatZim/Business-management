@@ -40,6 +40,7 @@
 	<!-- AJAX  -->
 	<script>
 		function checkPkt(str) {
+			totalAmout();
 			let pid = document.getElementById("productName").value;
 			if (str == "" || pid == "") {
 				document.getElementById("pkt").value = "0";
@@ -120,7 +121,7 @@
 
                             <div class="col-md-6 position-static">
                                 <label for="pprice">Sell Price/kg</label><br>
-                                <input type="number" min="0" step="0.1" placeholder="price /kg" id="price" name="price" required><br>
+                                <input type="number" min="0" step="0.1" onchange="totalAmout()" placeholder="price /kg" id="price" name="price" required><br>
                             </div>
 
                         </div>
@@ -142,14 +143,21 @@
 								<label for="s_phn">Customer's Mobile No</label><br>
                             	<input type="tel" pattern="[0]{1}[1]{1}[0-9]{9}" placeholder="format: 01758123578" id="c_phn" name="c_phn" required><br>
                             </div>
-
-                            <div class="col-md-6 position-static">
+							<div class="col-md-6 position-static">
+                                <label for="t_amount">Total Amount</label><br>
+								<input type="text" id="t_amount" name="t_amount" placeholder="total amount" disabled><br>
+							</div> 
+                            
+						</div>
+						<div class="row mt-3 mx-2">
+							
+							<div class="col-md-6 position-static">
                                 <label for="paid_amount">Paid Amount</label><br>
                                 <input type="number" min="0" step="0.1" placeholder="customer's payment" id="paid_amount" name="paid_amount" required><br>
                             </div>
 						</div>
 
-                                            </br></br>
+                            </br>
                     </div>
 
                     <div style="text-align:center">
@@ -180,17 +188,24 @@
 		
     </script>
 	<script>
+
 	$(document).ready(function()
-	{
-		$("#submit").click(function(){
-			var temp = $("#productName");
-			if(temp.val() == null)
-			{
-				document.getElementById("error").innerHTML = "Select a product";
-			}
-		});
-	});	
-</script>
+		{
+			$("#submit").click(function(){
+				var temp = $("#productName");
+				if(temp.val() == null)
+				{
+					document.getElementById("error").innerHTML = "Select a product";
+				}
+			});
+		});	
+
+		const totalAmout = () => {
+			let q = document.getElementById('qnt').value;
+			let p = document.getElementById('price').value;
+			document.getElementById('t_amount').value = p*q;
+		}
+	</script>
 
 
 </body>
