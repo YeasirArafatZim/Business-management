@@ -185,7 +185,7 @@
 									<td class="text-center" style="color: black;"><?php echo $name  ?></td>
 									<td class="text-center" style="color: black;"><?php echo $date  ?></td>
 									<td class="text-center" style="color: black;"><?php echo $time  ?></td>
-									<td class="text-center" style="font-weight: bold; color: green;"><?php echo $amount  ?><sub style="color:gray;">ট</sub></td>
+									<td class="text-center" style="font-weight: bold; color: green;"><?php echo round($amount,2)  ?><sub style="color:gray;">ট</sub></td>
 									<td class="text-center" > <button data-bs-toggle="modal" data-bs-target="#exampleModal<?php echo $pay_id;?>" style="margin: 0px; padding: 0px; background-color:white; cursor:pointer"><i class="fas fa-trash-alt fa-lg" style="color:red; background-color:white"></i></button> </td>
 								</tr>
 
@@ -238,7 +238,7 @@
 	<script type='text/javascript' src='../../js/main5152.js?ver=1.0' id='doro-main-js'></script>
 	<script>
         const logout = () => location.replace("../../logout.php");
-		document.getElementById("tAmount").innerHTML = "<?php echo $tAmount ?>";
+		document.getElementById("tAmount").innerHTML = "<?php echo round($tAmount,2) ?>";
 		
 		function printDiv(divName) {
 			let printDiv = document.getElementsByClassName(divName)[0];

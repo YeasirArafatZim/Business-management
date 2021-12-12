@@ -140,10 +140,10 @@
 						<h4 id="tProfit" style="font-weight:bold; color:#4BB543; display: inline">0 </h4>
 						<h4 style="font-weight:bold; display: inline">tk</h4>
 						<h4 style="font-weight:bold; display: inline;  margin-left: 140px">Extra Costs: </h4>
-						<h4 id="tProfit" style="font-weight:bold; color:red; display: inline;"><?php echo $tcost; ?> </h4>
+						<h4 id="tProfit" style="font-weight:bold; color:red; display: inline;"><?php echo round($tcost,2); ?> </h4>
 						<h4 style="font-weight:bold; display: inline">tk</h4>
 						<h4 style="font-weight:bold; display: inline;  margin-left: 140px">Due: </h4>
-						<h4 id="tProfit" style="font-weight:bold; color:red; display: inline;"><?php echo $tdue; ?> </h4>
+						<h4 id="tProfit" style="font-weight:bold; color:red; display: inline;"><?php echo round($tdue,2); ?> </h4>
 						<h4 style="font-weight:bold; display: inline">tk</h4>
 						<h6 id="print-date" class="hide-date" style="font-weight:bold; display: inline; float:right;"> <?php if($sDate == $eDate) {$d = date_create($sDate); echo date_format($d, "d-M-y");}else{$e = date_create($eDate); echo date_format($e, "d.M.y");} ?> </h6>
 						<h6 class="hide-date" style="display: inline; float:right;"> <?php  if($sDate != $eDate){echo ' - ';} ?> </h6>
@@ -196,7 +196,7 @@
 									<td class="text-center" style="color: black;"><?php echo $cname  ?></td>
 									<td class="text-center" style="color: black;"><?php echo $date  ?></td>
 									<td class="text-center" style="color: black;"><?php echo $time  ?></td>
-									<td class="text-center" style="font-weight: bold; color: green;"><?php echo $profit  ?><sub style="color:gray;">ট</sub></td>
+									<td class="text-center" style="font-weight: bold; color: green;"><?php echo round($profit,2)  ?><sub style="color:gray;">ট</sub></td>
 								</tr>
 
 								<?php     }}      ?>
@@ -227,7 +227,7 @@
 	<script type='text/javascript' src='../js/main5152.js?ver=1.0' id='doro-main-js'></script>
 	<script>
         const logout = () => location.replace("../logout.php");
-		document.getElementById("tProfit").innerHTML = "<?php echo $tProfit ?>";
+		document.getElementById("tProfit").innerHTML = "<?php echo round($tProfit,2); ?>";
 		
 		function printDiv(divName) {
 			let printDiv = document.getElementsByClassName(divName)[0];

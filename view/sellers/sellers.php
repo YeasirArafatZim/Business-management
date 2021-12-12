@@ -111,7 +111,7 @@
                                 <td style="font-weight: bold;color: black; text-align:center"><?php echo $name  ?></td>
                                 <td style="font-weight: bold; color: green; text-align:center"><?php echo $phn  ?></td>
                                 <td style=" color: black; text-align:center"><?php echo $add  ?></td>
-                                <td style="font-weight: bold; color: red; text-align:center"><?php echo $due  ?><sub style="color:gray;">ট</sub></td>
+                                <td style="font-weight: bold; color: red; text-align:center"><?php echo round($due,2);  ?><sub style="color:gray;">ট</sub></td>
                             </tr>
 
                             <?php     }}      ?>

@@ -103,7 +103,7 @@
 							<div class="card-header" style="font-size:20px">Profits</div>
 							<div class="card-body">
 								<h5 class="card-title" style="color:black">Total Profit</h5>
-								<p class="card-text" style="color:white; font-size:18px;font-weight:bold"><?php echo $tProfit; ?></p>
+								<p class="card-text" style="color:white; font-size:18px;font-weight:bold"><?php echo round($tProfit,2); ?></p>
 							</div>
 						</div>
 					</div>
@@ -113,7 +113,7 @@
 							<div class="card-header" style="font-size:20px">Sells</div>
 							<div class="card-body">
 								<h5 class="card-title" style="color:black">Total Sell</h5>
-								<p class="card-text" style="color:white; font-size:18px;font-weight:bold"><?php echo $sells; ?></p>
+								<p class="card-text" style="color:white; font-size:18px;font-weight:bold"><?php echo round($sells,2); ?></p>
 							</div>
 						</div>
 					</div>
@@ -123,7 +123,7 @@
 							<div class="card-header" style="font-size:20px">Dues</div>
 							<div class="card-body">
 								<h5 class="card-title" style="color:black">Total Due</h5>
-								<p class="card-text" style="color:white; font-size:18px;font-weight:bold"><?php echo $dues; ?></p>
+								<p class="card-text" style="color:white; font-size:18px;font-weight:bold"><?php echo round($dues,2); ?></p>
 							</div>
 						</div>
 					</div>
@@ -136,7 +136,7 @@
 							<div class="card-header" style="font-size:20px">Purchases</div>
 							<div class="card-body">
 								<h5 class="card-title" style="color:black">Total Purchase</h5>
-								<p class="card-text" style="color:white; font-size:18px;font-weight:bold"><?php echo $purchases; ?></p>
+								<p class="card-text" style="color:white; font-size:18px;font-weight:bold"><?php echo round($purchases,2); ?></p>
 							</div>
 						</div>
 					</div>

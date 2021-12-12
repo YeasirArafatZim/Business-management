@@ -84,7 +84,7 @@
 			<div class="container" style="padding-top: 80px;">
                 <div class="px-3 mb-3 text-center">
                     <h4 style="font-weight:bold; display: inline">Total Stock: </h4>
-                    <h4 id="tProfit" style="font-weight:bold; color:#4BB543; display: inline"><?php echo $total; ?> </h4>
+                    <h4 id="tProfit" style="font-weight:bold; color:#4BB543; display: inline"><?php echo round($total,2); ?> </h4>
                     <h4 style="font-weight:bold; display: inline">tk</h4>
                 </div>
                 <div class="px-3 table-responsive">
@@ -128,7 +128,7 @@
                                 <td style="color: black; text-align:center"><?php echo $pkt ?></td>
                                 <td style="color: black; text-align:center"><?php echo $s_phn ?></td>
                                 <td style="color: black; text-align:center"><?php echo $s_name  ?></td>
-                                <td style="font-weight: bold; color: green; text-align:center"><?php echo $price  ?><sub style="color:gray;">ট</sub></td>
+                                <td style="font-weight: bold; color: green; text-align:center"><?php echo round($price,2)  ?><sub style="color:gray;">ট</sub></td>
                             </tr>
 
                             <?php     }}      ?>

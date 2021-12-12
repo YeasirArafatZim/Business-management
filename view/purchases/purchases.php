@@ -202,9 +202,9 @@
 									<td class="text-center" style="color: black;"><?php echo $time  ?></td>
 									<td class="text-center" style="color: black;"><?php echo $qnt  ?></td>
 									<td class="text-center" style="color: black;"><?php echo $pkt  ?></td>
-									<td class="text-center" style="font-weight: bold; color: red;"><?php echo $due  ?><sub style="color:gray;">ট</sub></td>
-									<td class="text-center" style="font-weight: bold; color: green;"><?php echo $price  ?><sub style="color:gray;">ট</sub></td>
-									<td class="text-center" style="font-weight: bold; color: blue;"><?php echo $trans_cost  ?><sub style="color:gray;">ট</sub></td>
+									<td class="text-center" style="font-weight: bold; color: red;"><?php echo round($due,2)  ?><sub style="color:gray;">ট</sub></td>
+									<td class="text-center" style="font-weight: bold; color: green;"><?php echo round($price,2)  ?><sub style="color:gray;">ট</sub></td>
+									<td class="text-center" style="font-weight: bold; color: blue;"><?php echo round($trans_cost,2)  ?><sub style="color:gray;">ট</sub></td>
 									<td class="text-center" > <button data-bs-toggle="modal" data-bs-target="#exampleModal<?php echo $pur_id?>" style="margin: 0px; padding: 0px; background-color:white; cursor:pointer"><i class="fas fa-trash-alt fa-lg" style="color:red; background-color:white"></i></button> </td>
 								</tr>
 
@@ -257,8 +257,8 @@
 	<script type='text/javascript' src='../../js/main5152.js?ver=1.0' id='doro-main-js'></script>
 	<script>
         const logout = () => location.replace("../../logout.php");
-		document.getElementById("tProfit").innerHTML = "<?php echo $tPrice ?>";
-		document.getElementById("tCost").innerHTML = "<?php echo $tCost ?>";
+		document.getElementById("tProfit").innerHTML = "<?php echo round($tPrice,2) ?>";
+		document.getElementById("tCost").innerHTML = "<?php echo round($tCost,2) ?>";
 		
 		function printDiv(divName) {
 			let printDiv = document.getElementsByClassName(divName)[0];
