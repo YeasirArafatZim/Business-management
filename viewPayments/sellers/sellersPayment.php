@@ -161,7 +161,7 @@
 							<tbody>
 								
 								<?php  
-									$sql = "SELECT id, sid, date, amount, name  FROM seller_payment INNER JOIN sellers ON seller_payment.sid=sellers.phn_no where seller_payment.date between '$sDate' and '$enDate' order by seller_payment.date desc";
+									// $sql = "SELECT id, sid, date, amount, name  FROM seller_payment INNER JOIN sellers ON seller_payment.sid=sellers.phn_no where seller_payment.date between '$sDate' and '$enDate' order by seller_payment.date desc";
 									$sql = "SELECT id, sid, date, sum(amount) as amount, name  FROM seller_payment INNER JOIN sellers ON seller_payment.sid=sellers.phn_no where seller_payment.date between '$sDate' and '$enDate' group by date(date),sid";
 									$result = mysqli_query($conn, $sql);
 									$i = 1;
@@ -204,7 +204,7 @@
 											<div class="modal-footer">
 												<!-- <button type="button" style="background-color:gray" class="btn" data-bs-dismiss="modal">Close</button> -->
 												<a class="btn" href="#" data-bs-dismiss="modal" style="background-color:gray">Close</a>
-												<a href="delete.php?pay_id=<?php echo $pay_id;?>" class="btn" style="background-color:#ff1a1a">Delete</a>
+												<a href="delete.php?s_phn=<?php echo $phn;?>&date=<?php echo $dateTime ?>" class="btn" style="background-color:#ff1a1a">Delete</a>
 											</div>
 											</div>
 										</div>
