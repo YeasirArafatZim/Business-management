@@ -191,23 +191,23 @@
 
 								<!-- Modal -->
 								<div class="modal fade" id="exampleModal<?php echo $pay_id;?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-										<div class="modal-dialog modal-dialog-centered">
-											<div class="modal-content">
-											<div class="modal-header">
-												<h5 class="modal-title" id="exampleModalLabel" style="font-weight:bold">Delete Sell</h5>
-												<button type="button" style="background-color:white; color:black; cursor:pointer; margin:0px; padding: 0px " data-bs-dismiss="modal" aria-label="Close"><i class="fas fa-times fa-lg"></i></button>
-											</div>
-											<div class="modal-body" style="padding:0px; padding-top:18px">
-												<h6 style="text-align:center; font-weight:bold; color:#cc0000">Are you sure you want to delete this sell?</h6>
-											</div>
-											<div class="modal-footer">
-												<!-- <button type="button" style="background-color:gray" class="btn" data-bs-dismiss="modal">Close</button> -->
-												<a class="btn" href="#" data-bs-dismiss="modal" style="background-color:gray">Close</a>
-												<a href="delete.php?pay_id=<?php echo $pay_id;?>" class="btn" style="background-color:#ff1a1a">Delete</a>
-											</div>
-											</div>
+									<div class="modal-dialog modal-dialog-centered">
+										<div class="modal-content">
+										<div class="modal-header">
+											<h5 class="modal-title" id="exampleModalLabel" style="font-weight:bold">Delete Sell</h5>
+											<button type="button" style="background-color:white; color:black; cursor:pointer; margin:0px; padding: 0px " data-bs-dismiss="modal" aria-label="Close"><i class="fas fa-times fa-lg"></i></button>
+										</div>
+										<div class="modal-body" style="padding:0px; padding-top:18px">
+											<h6 style="text-align:center; font-weight:bold; color:#cc0000">Are you sure you want to delete this sell?</h6>
+										</div>
+										<div class="modal-footer">
+											<!-- <button type="button" style="background-color:gray" class="btn" data-bs-dismiss="modal">Close</button> -->
+											<a class="btn" href="#" data-bs-dismiss="modal" style="background-color:gray">Close</a>
+											<a href="delete.php?pay_id=<?php echo $pay_id;?>" class="btn" style="background-color:#ff1a1a">Delete</a>
+										</div>
 										</div>
 									</div>
+								</div>
 								<!-- Modal End  -->
 
 								<?php     }}      ?>

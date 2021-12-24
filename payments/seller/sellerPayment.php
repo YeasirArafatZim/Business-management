@@ -15,7 +15,6 @@
 	<meta name="robots" content="index, follow" />
 	<title>মুণি ট্রেডার্স &#8211; Payments </title>
 
-
 	<!-- SideBar Links -->
 	<link rel='stylesheet' id='doro-themify-icons-css' href='../../css/themify-icons76f3.css?ver=5.7.3' type='text/css' media='all' />
 	<link rel='stylesheet' id='doro-bootstrap-css' href='../../css/bootstrap76f3.css?ver=5.7.3' type='text/css' media='all' />
@@ -48,7 +47,43 @@
 				xmlhttp.send();
 			}
 		}
+
+        const showAmount = (amount) =>{
+            document.getElementById("leftDue").innerHTML = 'Amount Left: ' + amount;
+        }
+
+		const minusAmount = () => {
+			let t = document.getElementById("paid_amount").value;
+			var selected = [];
+			for (var option of document.getElementById('productName').options)
+			{
+				if (option.selected) {
+					selected.push(JSON.parse(option.value));
+				}
+			}
+
+			let dueLeft = 0;
+			for(var x of selected){
+				// console.log(x.due);
+				dueLeft += parseFloat(x.due);
+			}
+
+			document.getElementById("leftDue").innerHTML = 'Amount Left: ' + String(t - dueLeft);
+			var tempDueLeft = t - dueLeft;
+			if((t - dueLeft) <= 0 ){
+				let btn = '<input type="submit" value="Submit" id="submit" name="submit" class="btnSuccess">';
+				document.getElementById('submitButton').innerHTML = btn;
+			}else{
+				let btn = '';
+				document.getElementById('submitButton').innerHTML = btn;
+			}
+			return dueLeft;
+		}
+
+		
+
 	</script>
+
 
 </head>
 
@@ -106,8 +141,8 @@
                         <br><br>
                     </div>
 
-                    <div style="text-align:center">
-                        <input type="submit" value="Submit" name="submit" class="btnSuccess">
+                    <div style="text-align:center" id = 'submitButton'>
+                        <!-- <input type="submit" value="Submit" id="submit" name="submit" class="btnSuccess"> -->
                     </div>
                     
                 </form>

@@ -100,7 +100,7 @@
                         
                     <div class="row">
                         <div class="col-md-6 col-sm-6 col-6 position-static">
-                            <p class="verify_label">Cutomer's Mobile No: </p>
+                            <p class="verify_label">Seller's Mobile No: </p>
                         </div>
                         <div class="col-md-6 col-sm-6 col-6 position-static">
                             <p class="verify_data"><?php $phn = substr($s_phn,5);
@@ -133,6 +133,20 @@
                             <p class="verify_data"><?php echo $p_amount?></p>
                         </div>
                     </div>
+
+                    <?php foreach($purchaseId as $id){
+                        $i = json_decode($id)->id;
+                    ?>
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6 col-6 position-static">
+                                <p class="verify_label">Product id: </p>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-6 position-static">
+                                <p class="verify_data"><?php echo $i?></p>
+                            </div>
+                        </div>
+                    <?php  } ?>
+
                     <?php }else{ ?>
 
                         <h4 class="mx-auto text-center">You don't make any purchase from this Seller. Please check Mobile no.</h4>

@@ -153,7 +153,7 @@
 									<th class="text-center" scope="col">Mobile No</th>
 									<th class="text-center" scope="col">Name</th>
 									<th class="text-center" scope="col">Date</th>
-									<th class="text-center" scope="col">Time</th>
+									<!-- <th class="text-center" scope="col">Time</th> -->
 									<th class="text-center" scope="col">Amount</th>
 									<th class="text-center" scope="col">Action</th>
 								</tr>
@@ -162,6 +162,7 @@
 								
 								<?php  
 									$sql = "SELECT id, sid, date, amount, name  FROM seller_payment INNER JOIN sellers ON seller_payment.sid=sellers.phn_no where seller_payment.date between '$sDate' and '$enDate' order by seller_payment.date desc";
+									$sql = "SELECT id, sid, date, sum(amount) as amount, name  FROM seller_payment INNER JOIN sellers ON seller_payment.sid=sellers.phn_no where seller_payment.date between '$sDate' and '$enDate' group by date(date),sid";
 									$result = mysqli_query($conn, $sql);
 									$i = 1;
 
@@ -173,7 +174,7 @@
 											$phn = $row["sid"];
 											$dateTime = $row["date"];
 											$date = date("d-M-Y",strtotime($dateTime));
-											$time = date("h:i A", strtotime($dateTime));
+											// $time = date("h:i A", strtotime($dateTime));
 											$amount = $row["amount"];
 											$tAmount += $amount;
 																		
@@ -184,7 +185,7 @@
 									<td class="text-center" style="color: black; font-weight: bold;"><?php echo $phn  ?></td>
 									<td class="text-center" style="color: black;"><?php echo $name  ?></td>
 									<td class="text-center" style="color: black;"><?php echo $date  ?></td>
-									<td class="text-center" style="color: black;"><?php echo $time  ?></td>
+									<!-- <td class="text-center" style="color: black;"><?php echo $time  ?></td> -->
 									<td class="text-center" style="font-weight: bold; color: green;"><?php echo round($amount,2)  ?><sub style="color:gray;">ট</sub></td>
 									<td class="text-center" > <button data-bs-toggle="modal" data-bs-target="#exampleModal<?php echo $pay_id;?>" style="margin: 0px; padding: 0px; background-color:white; cursor:pointer"><i class="fas fa-trash-alt fa-lg" style="color:red; background-color:white"></i></button> </td>
 								</tr>
