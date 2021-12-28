@@ -42,7 +42,7 @@
         <label for="paid_amount">Select a Due&nbsp;&nbsp;&nbsp;</label> <label id="leftDue" style="color:red;float:right;"></label><br>
                                     
         <select style="widht:100%;" onchange="minusAmount()" name="productName[]" id="productName" multiple="multiple" required >
-            <option value="" disabled selected>--Select a Purchase--</option>
+            <option value="" disabled selected>--Select Dues--</option>
                     <?php
                         $sql="SELECT purchase.id as id, purchase.due as due, purchase.date as date , products.name as name from purchase inner join products on purchase.pid=products.id where products.sid = '$phn' order by purchase.due desc ";
                         $result = mysqli_query($conn,$sql);

@@ -5,65 +5,87 @@
 	if(isset($_POST["submit"]) && isset($_SESSION["c_phn"])){
 
         $c_phn = $_SESSION["c_phn"];
-        $c_amount = $_SESSION["c_amount"];
+        $amount = $_SESSION["c_amount"];
         $sell_id = $_SESSION['sell_id'];
-        
-        
-        if($c_amount > 0 && $sell_id >= '0'){
-            // Insert Customer Payment
-            $sql = "INSERT INTO customer_payment VALUES (DEFAULT, '$c_phn','$c_amount', CURRENT_TIMESTAMP, '$sell_id' )";
-            if (!mysqli_query($conn, $sql)) {
-                echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+        $temp_amount = $amount;
+
+        foreach($sell_id as $id){
+            $i = json_decode($id)->id;
+
+            if($i >= '0'){
+                $sql = "SELECT * from sell where id = '$i' ";
+                $result = mysqli_query($conn, $sql);
+                $row = mysqli_fetch_assoc($result);
+                $cDue = $row['due'];
+            }else{
+                $sql = "SELECT * from customer_previous_due where cid = '$c_phn' ";
+                $result = mysqli_query($conn, $sql);
+                $row = mysqli_fetch_assoc($result);
+                $cDue = $row['due'];
+            }
+            
+            if($temp_amount >= $cDue){
+                $p_amount = $cDue;
+                $temp_amount = $temp_amount - $cDue;
+            }else{
+                $p_amount = $temp_amount;
+                $temp_amount = 0;
             }
 
-            // Update sells due
-            $sql = "SELECT due FROM sell WHERE id = '$sell_id'";
-            $result = mysqli_query($conn, $sql);
-            $row = mysqli_fetch_assoc($result);
-            $due = $row["due"];
-            $due = $due - $c_amount;
-            $sql = "UPDATE sell SET due = '$due' WHERE id = '$sell_id'";
-            if (!mysqli_query($conn, $sql)) {
-                echo "Error updating due in sell table: " . mysqli_error($conn);
+        
+            if($p_amount > 0 && $i >= '0'){
+                // Insert Customer Payment
+                $sql = "INSERT INTO customer_payment VALUES (DEFAULT, '$c_phn','$p_amount', CURRENT_TIMESTAMP, '$i' )";
+                if (!mysqli_query($conn, $sql)) {
+                    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+                }
+
+                // Update Sell
+                $sql = "select due from sell where id = '$i'";
+                $result = mysqli_query($conn, $sql);
+                $row = mysqli_fetch_assoc($result);
+                $c_due = $row['due'];
+                $n_due = $row['due']-$p_amount;
+
+                $sql = "UPDATE sell SET due = '$n_due' WHERE id = '$i'";
+                if (!mysqli_query($conn, $sql)) {
+                    echo "Error updating purchase: " . mysqli_error($conn);
+                }
+            }
+
+            if($p_amount > 0 && $i == '-10'){
+
+                // Update Customer previous due
+                $sql = "select * from customer_previous_due where cid = '$c_phn'";
+                $result = mysqli_query($conn, $sql);
+                $row = mysqli_fetch_assoc($result);
+                $pDue = $row["due"];
+                $nDue = $pDue - $p_amount;
+
+                $sql = "UPDATE customer_previous_due SET due = '$nDue' WHERE cid = '$c_phn'";
+                if (!mysqli_query($conn, $sql)) {
+                    echo "Error updating seller_previous_due record: " . mysqli_error($conn);
+                }
+
+                // Insert Customer Payment
+                $sql = "INSERT INTO customer_payment VALUES (DEFAULT, '$c_phn','$p_amount', CURRENT_TIMESTAMP, '$i' )";
+                if (!mysqli_query($conn, $sql)) {
+                    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+                }
+
             }
         }
-
-
-        if($c_amount > 0 && $sell_id == '-10'){
-
-            // Update Customer previous due
-            $sql = "select * from customer_previous_due where cid = '$c_phn'";
-            $result = mysqli_query($conn, $sql);
-            $row = mysqli_fetch_assoc($result);
-            $pDue = $row["due"];
-            $nDue = $pDue - $c_amount;
-
-            $sql = "UPDATE customer_previous_due SET due = '$nDue' WHERE cid = '$c_phn'";
-            if (!mysqli_query($conn, $sql)) {
-                echo "Error updating Customer_previous_due record: " . mysqli_error($conn);
-            }
-
-            // Insert Customer Payment
-            $sql = "INSERT INTO customer_payment VALUES (DEFAULT, '$c_phn','$c_amount', CURRENT_TIMESTAMP, '$sell_id' )";
-            if (!mysqli_query($conn, $sql)) {
-                echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-            }
-
-        }
-
-        
 
         // Update Customer
-        $sql = "SELECT cost,paid, due FROM customers WHERE phn_no = '$c_phn'";
+        $sql = "SELECT paid, due FROM customers WHERE phn_no = '$c_phn'";
         $result = mysqli_query($conn, $sql);
         $row = mysqli_fetch_assoc($result);
 
-        $cost = $row["cost"];
         $paid = $row["paid"];
         $due = $row["due"];
 
-        $new_paid = $paid + $c_amount;
-        $new_due = $due - $c_amount;
+        $new_paid = $paid + $amount;
+        $new_due = $due - $amount;
 
         $sql = "UPDATE customers SET paid = '$new_paid', due = '$new_due' WHERE phn_no = '$c_phn'";
         if (!mysqli_query($conn, $sql)) {
@@ -73,21 +95,20 @@
                                             alert("Payment not successfully added.");
                                         }, 500); 
                                     </script>';
-                header('location: customerPayment.php');
-            }else{
-                $_SESSION["msg"] = '<script>
-                                        window.setTimeout(function(){
-                                            alert("Payment Successfully Added");
-                                        }, 500); 
-                                    </script>';
+            header("Location: customerPayment.php");
+        }else{
+            $_SESSION["msg"] = '<script>
+                                    window.setTimeout(function(){
+                                        alert("Customer Payment Successfully Added");
+                                    }, 500); 
+                                </script>';
 
 
-                unset($_SESSION['c_phn']);
-                unset($_SESSION['c_amount']);
-                header('location: customerPayment.php');
-
+            unset($_SESSION['c_phn']);
+            unset($_SESSION['c_amount']);
+            unset($_SESSION['sell_id']);
+            header("Location: customerPayment.php");
             }
-
 
     }else if(isset($_POST["close"])){
         header("Location: customerPayment.php");

@@ -106,6 +106,7 @@
 
                 unset($_SESSION['s_phn']);
                 unset($_SESSION['p_amount']);
+                unset($_SESSION['purchase_id']);
                 header('location: sellerPayment.php');
 
             }

@@ -145,7 +145,6 @@
 						
 
 					<div class="px-3 table-responsive">
-						<!-- <input type="text" id="myInput" onkeyup="mySearchFunction()" placeholder="Search for products.." title="Type in a name"> -->
 						<table id="myTable" class="table table-striped borderless table-bordered">
 							<thead class="table-dark">
 								<tr>
@@ -153,7 +152,6 @@
 									<th class="text-center" scope="col">Mobile No</th>
 									<th class="text-center" scope="col">Name</th>
 									<th class="text-center" scope="col">Date</th>
-									<th class="text-center" scope="col">Time</th>
 									<th class="text-center" scope="col">Amount</th>
 									<th class="text-center" scope="col">Action</th>
 								</tr>
@@ -161,7 +159,7 @@
 							<tbody>
 								
 								<?php  
-									$sql = "SELECT id,cid, date, amount, name  FROM customer_payment INNER JOIN customers ON customer_payment.cid=customers.phn_no where customer_payment.date between '$sDate' and '$enDate' order by customer_payment.date desc";
+									$sql = "SELECT id, cid, date, sum(amount) as amount, name  FROM customer_payment INNER JOIN customers ON customer_payment.cid=customers.phn_no where customer_payment.date between '$sDate' and '$enDate' group by date(date),cid  order by customer_payment.date desc";
 									$result = mysqli_query($conn, $sql);
 									$i = 1;
 
@@ -173,7 +171,6 @@
 											$phn = $row["cid"];
 											$dateTime = $row["date"];
 											$date = date("d-M-Y",strtotime($dateTime));
-											$time = date("h:i A", strtotime($dateTime));
 											$amount = $row["amount"];
 											$tAmount += $amount;
 																		
@@ -184,7 +181,6 @@
 									<td class="text-center" style="color: black; font-weight: bold;"><?php echo $phn  ?></td>
 									<td class="text-center" style="color: black;"><?php echo $name  ?></td>
 									<td class="text-center" style="color: black;"><?php echo $date  ?></td>
-									<td class="text-center" style="color: black;"><?php echo $time  ?></td>
 									<td class="text-center" style="font-weight: bold; color: green;"><?php echo round($amount,2);  ?><sub style="color:gray;">ট</sub></td>
 									<td class="text-center" > <button data-bs-toggle="modal" data-bs-target="#exampleModal<?php echo $pay_id;?>" style="margin: 0px; padding: 0px; background-color:white; cursor:pointer"><i class="fas fa-trash-alt fa-lg" style="color:red; background-color:white"></i></button> </td>
 								</tr>
@@ -201,9 +197,8 @@
 											<h6 style="text-align:center; font-weight:bold; color:#cc0000">Are you sure you want to delete this sell?</h6>
 										</div>
 										<div class="modal-footer">
-											<!-- <button type="button" style="background-color:gray" class="btn" data-bs-dismiss="modal">Close</button> -->
 											<a class="btn" href="#" data-bs-dismiss="modal" style="background-color:gray">Close</a>
-											<a href="delete.php?pay_id=<?php echo $pay_id;?>" class="btn" style="background-color:#ff1a1a">Delete</a>
+											<a href="delete.php?c_phn=<?php echo $phn;?>&date=<?php echo $dateTime ?>" class="btn" style="background-color:#ff1a1a">Delete</a>
 										</div>
 										</div>
 									</div>

@@ -162,7 +162,7 @@
 								
 								<?php  
 									// $sql = "SELECT id, sid, date, amount, name  FROM seller_payment INNER JOIN sellers ON seller_payment.sid=sellers.phn_no where seller_payment.date between '$sDate' and '$enDate' order by seller_payment.date desc";
-									$sql = "SELECT id, sid, date, sum(amount) as amount, name  FROM seller_payment INNER JOIN sellers ON seller_payment.sid=sellers.phn_no where seller_payment.date between '$sDate' and '$enDate' group by date(date),sid";
+									$sql = "SELECT id, sid, date, sum(amount) as amount, name  FROM seller_payment INNER JOIN sellers ON seller_payment.sid=sellers.phn_no where seller_payment.date between '$sDate' and '$enDate' group by date(date),sid order by seller_payment.date desc";
 									$result = mysqli_query($conn, $sql);
 									$i = 1;
 

@@ -18,7 +18,7 @@ while($row = mysqli_fetch_assoc($result1)){
     $amount = $row['amount'];
     $pay_id = $row['id'];
 
-    echo $pay_id . '  '. $amount . '  ' . $sid . '  '. $pur_id . '<br>';
+    // echo $pay_id . '  '. $amount . '  ' . $sid . '  '. $pur_id . '<br>';
     if($pur_id == '-10'){
         // Update seller_previous_due
         $sql = "select * from seller_previous_due where sid = '$sid'";
