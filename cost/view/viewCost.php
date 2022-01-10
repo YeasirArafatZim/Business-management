@@ -160,7 +160,7 @@
 							<tbody>
 								
 								<?php  
-									$sql = "SELECT * from cost order by date desc";
+									$sql = "SELECT * from cost where date between '$sDate' and '$enDate' order by date desc";
 									$result = mysqli_query($conn, $sql);
 									$i = 1;
 
