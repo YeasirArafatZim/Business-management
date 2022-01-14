@@ -95,6 +95,19 @@
 							<li><a class="dropdown-item" style="margin:0px; height:40px;padding-top:10px;" href="/business_management/view/purchases/inputDate.php"><p style="text-align:center">Purchases</p></a></li>
 						</ul>
 					</li>
+
+					<li>
+						<a class="nav-link dropdown-toggle <?php echo($currentPage == "other" ? 'selectedMenu' : '');  ?>"  onclick="other()" href="#">
+							Other
+						</a>
+						<ul class="dropdown-content" id="other" style="background-color:black;width:100%; overflow:hidden">
+							<li><a class="dropdown-item" style="margin:0px; height:40px;padding-top:10px" href="/business_management/other/status/status.php"><p style="text-align:center">Status</p></a></li>
+							<li><a class="dropdown-item" style="margin:0px; height:40px;padding-top:10px;" href="/business_management/other/take/take.php"><p style="text-align:center">Take</p></a></li>
+							<li><a class="dropdown-item" style="margin:0px; height:40px;padding-top:10px;" href="/business_management/other/give/give.php"><p style="text-align:center">Give</p></a></li>
+							<li><a class="dropdown-item" style="margin:0px; height:40px;padding-top:10px;" href="/business_management/other/take_details/inputDate.php"><p style="text-align:center">Take Details</p></a></li>
+							<li><a class="dropdown-item" style="margin:0px; height:40px;padding-top:10px;" href="/business_management/other/give_details/inputDate.php"><p style="text-align:center">Give Details</p></a></li>
+						</ul>
+					</li>
 					
 
 				</ul>
@@ -163,6 +176,14 @@
 					document.getElementById("myDropdown5").style.display = "none";
 				}else{
 					document.getElementById("myDropdown5").style.display = "block";
+				}
+			}
+			function other() {
+				let temp = document.getElementById("other");
+				if(temp.style.display === 'block'){
+					document.getElementById("other").style.display = "none";
+				}else{
+					document.getElementById("other").style.display = "block";
 				}
 			}
 			
